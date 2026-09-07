@@ -4,18 +4,17 @@ const H2 = ({m,children}) => <h2 style={{fontSize:m?28:36,lineHeight:1.15,fontWe
 const P = ({children}) => <p style={{fontSize:18,lineHeight:1.55,maxWidth:'65ch',marginBottom:16}}>{children}</p>;
 function Cause({mobile}){ return <section id="cause" style={wrap(mobile)}>
   <H2 m={mobile}>The cause</H2>
-  <P>Bladder cancer is the sixth most common cancer in the US and one of the least funded. My Uncle Dave is fighting it right now. I can't do much about that from the road, but I can run, and I can ask.</P>
-  <P>Every dollar goes to bladder cancer research, disabled veterans, or directly to helping support Dave. Nothing covers my race entry, shoes, or travel. That's on me.</P>
-  <P>Tax-deductible donations go through [charity], a registered 501(c)(3). Or Venmo me and skip the paperwork. Either way, please give what you can.</P>
+  <P>Bladder cancer is the sixth most common cancer in the US and one of the least funded. My Uncle Dave is fighting it right now. I can't do much about that from the road, but I can run, I can raise awareness, and I can ask for support.</P>
+  <P>Every dollar goes to bladder cancer research, disabled veterans, or directly to helping support my Uncle Dave and his family. Nothing covers my race entry, shoes, travel, or fuel. That's on me.</P>
+  <P>Tax-deductible donations go through [charity], a registered 501(c)(3). Or Venmo me, skip the paperwork, and I'll send you a recipt of where your money went. Either way, giving what you can would mean the world to me.</P>
 </section>; }
 function Run({mobile, steps}){ return <section id="run" style={{background:'var(--pco-paper-2)'}}><div style={wrap(mobile)}>
   <H2 m={mobile}>The run</H2>
-  <P>The Southern Tour Ultra is 100 miles on a loop course in Wilmington, NC. I start at 7am on January 15, 2027 and have 30 hours to finish. I've never run more than 50.</P>
-  <P>Until then I'm training six days a week in the yellow shirt, usually with the flag. If you see me running through your tailgate, that's on purpose. Say hi.</P>
+  <P>The Southern Tour Ultra is 100 miles on a loop course in Wilmington, NC. I start at 12pm on January 15, 2027. I've never run more than 40.</P>
+  <P>Until then I'm training six days a week in the yellow shirt, with the flag in hand. If you see me running through your town, that's on purpose. Say hi.</P>
   <div style={{display:'grid',gridTemplateColumns:mobile?'1fr 1fr':'repeat(3,auto)',gap:mobile?24:48,marginTop:32,alignItems:'end'}}>
     <BigNumber size={mobile?'md':'lg'} value="100" caption="miles on Jan 15, 2027" />
     <BigNumber size={mobile?'md':'lg'} color="ink" value={steps} caption="steps since January 1st" source="from COROS watch" />
-    <BigNumber size={mobile?'md':'lg'} color="ink" value="30" caption="hour cutoff" />
   </div>
   <div style={{marginTop:28}}><Photo src="assets/photos/shirt.jpg" label="Real photo: the shirt and the flag" style={{aspectRatio:'16/9'}} /></div>
 </div></section>; }
