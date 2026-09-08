@@ -734,7 +734,7 @@ function Run({
     style: wrap(mobile)
   }, /*#__PURE__*/React.createElement(H2, {
     m: mobile
-  }, "The run"), /*#__PURE__*/React.createElement(P, null, "The Southern Tour Ultra is 100 miles on a loop course in Wilmington, NC. I start at 7am on January 15, 2027 and have 30 hours to finish. I've never run more than 50."), /*#__PURE__*/React.createElement(P, null, "Until then I'm training six days a week in the yellow shirt, usually with the flag. If you see me running through your tailgate, that's on purpose. Say hi."), /*#__PURE__*/React.createElement("div", {
+  }, "The run"), /*#__PURE__*/React.createElement(P, null, "The Southern Tour Ultra is 100 miles on a loop course in Wilmington, NC. I start at 12pm on January 15, 2027, with a goal to finish in 24 hours. I've never run more than 40."), /*#__PURE__*/React.createElement(P, null, "Until then I'm training six days a week in the yellow shirt, usually with the flag. If you see me running through your tailgate, that's on purpose. Say hi."), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'grid',
       gridTemplateColumns: mobile ? '1fr 1fr' : 'repeat(3,auto)',
