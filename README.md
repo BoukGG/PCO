@@ -10,7 +10,7 @@ Static, no build step. Everything in this folder is what gets served.
 5. Custom domain: add a `CNAME` file containing `pisscanceroff.org`, then point the domain's DNS at GitHub Pages (A records 185.199.108.153 / .109 / .110 / .111 and a `www` CNAME to `<user>.github.io`). Tick "Enforce HTTPS" once the certificate is issued.
 
 ## Edit content
-- `js/data.js` — raised amount, goal, training stats (miles/steps/hours/runs/calories), charity line, Venmo, email, Strava/Instagram links, pledge-form IDs. This is the only file you need to touch for routine updates.
+- `js/data.js` — raised amount, goal, race start instant (for the countdown), training stats (miles/steps/hours/runs/calories), charity line, Venmo, email, Strava/Instagram links, pledge-form IDs. This is the only file you need to touch for routine updates.
 - `assets/photos/` — drop `hero.jpg` and `shirt.jpg` (see README there).
 - Copy text lives in `js/sections.jsx` (The cause, The run) and `js/hero.jsx` (headline).
 

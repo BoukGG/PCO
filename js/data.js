@@ -2,6 +2,8 @@
 window.PCO_DATA = {
   raised: 0,
   goal: 10000,
+  // Race start as one fixed instant (UTC), so every visitor counts down to the same moment: Jan 15, 2027, 12:00 PM Eastern (EST = UTC-5).
+  raceStart: "2027-01-15T17:00:00Z",
   // Training stats section. Plain strings, formatted however you want them shown.
   stats: {
     miles: "1,160",

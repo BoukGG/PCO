@@ -17,11 +17,26 @@ function Run({mobile, onPledge}){ return <section id="run" style={wrap(mobile)}>
   <P>Pledge an amount per mile. Whether that's a dime or a dollar, anything helps me push to the finish. You only pay for the miles I actually finish inside my 24-hour goal. Cover all 100 and a $1 pledge turns into $100 for a real cause. The pressure to achieve my goal is exactly what I need to get out the door on the days I'd rather not train. I'll follow up with everyone who pledged once the ultramarathon is done.</P>
   <Button variant="donate" fullWidth={mobile} onClick={onPledge}>Join the pledge</Button>
 </section>; }
-function Stats({mobile, stats, strava, instagram}){
+function Countdown({mobile, target}){
+  const t=new Date(target).getTime();
+  const [now,setNow]=React.useState(()=>Date.now());
+  React.useEffect(()=>{ const id=setInterval(()=>setNow(Date.now()),1000); return ()=>clearInterval(id); },[]);
+  const left=Math.max(0,t-now); const s=Math.floor(left/1000);
+  const parts=[[Math.floor(s/86400),'days'],[Math.floor(s/3600)%24,'hours'],[Math.floor(s/60)%60,'minutes'],[s%60,'seconds']];
+  const pad=n=>String(n).padStart(2,'0');
+  return <div style={{marginTop:24,marginBottom:36,padding:mobile?'20px 16px':'24px 28px',background:'var(--pco-navy-deep)',borderRadius:6,color:'#fff'}}>
+    <div style={{fontSize:14,lineHeight:1.4,color:'rgba(255,255,255,.75)',marginBottom:12}}>{left>0?'Countdown to the start line — Jan 15, 2027, 12:00 PM ET':'The run has started. Follow along on Strava.'}</div>
+    <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:mobile?8:16}}>
+      {parts.map(([v,l])=><div key={l}><div style={{fontFamily:'var(--font-display)',fontWeight:700,fontSize:mobile?36:56,lineHeight:1,color:'#fff'}}>{l==='days'?v:pad(v)}</div><div style={{fontSize:13,color:'rgba(255,255,255,.75)',marginTop:6}}>{v===1?l.slice(0,-1):l}</div></div>)}
+    </div>
+  </div>;
+}
+function Stats({mobile, stats, raceStart, strava, instagram}){
   const items=[['miles',stats.miles,'miles run in training'],['steps',stats.steps,'steps taken'],['hours',stats.hours,'hours on my feet'],['runs',stats.runs,'training runs'],['calories',stats.calories,'calories burned']];
   const follow=[strava&&['Strava',strava],instagram&&['Instagram',instagram]].filter(Boolean);
   return <section id="stats" style={{background:'var(--pco-paper-2)'}}><div style={wrap(mobile)}>
   <H2 m={mobile}>Training stats</H2>
+  {raceStart && <Countdown mobile={mobile} target={raceStart} />}
   <P>Logged since January 1st, 2026.</P>
   <div style={{display:'grid',gridTemplateColumns:mobile?'1fr 1fr':'repeat(3,1fr)',gap:mobile?'28px 16px':'36px 32px',marginTop:28,alignItems:'end'}}>
     {items.map(([k,v,cap])=><BigNumber key={k} size={mobile?'sm':'md'} color={k==='miles'?'navy':'ink'} value={v} caption={cap} />)}
