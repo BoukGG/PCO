@@ -8,7 +8,7 @@ function Cause({mobile}){ return <section id="overview" style={wrap(mobile)}>
   <P>Every dollar I raise during this campaign goes to bladder cancer research, disabled veterans, or directly to helping support my Uncle Dave and his family.</P>
   <P>Tax-deductible donations go through [charity], a registered 501(c)(3). Or Venmo me and I'll follow up with where your money went. Either way, giving what you can means the world.</P>
 </section>; }
-function Run({mobile, steps, onPledge}){ return <section id="run" style={wrap(mobile)}>
+function Run({mobile, onPledge}){ return <section id="run" style={wrap(mobile)}>
   <H2 m={mobile}>The run</H2>
   <P>The Southern Tour Ultra is 100 miles on a loop course in Wilmington, NC. I start at 12pm on January 15, 2027, and am hoping to finish within 24 hours.</P>
   <P>I would be lying if I said I wasn't a bit afraid. I've never run more than 40.</P>
@@ -16,11 +16,18 @@ function Run({mobile, steps, onPledge}){ return <section id="run" style={wrap(mo
   <h3 id="pledge" style={{fontSize:mobile?22:26,lineHeight:1.2,fontWeight:600,marginTop:36,paddingTop:28,borderTop:'1px solid var(--color-border)',marginBottom:14}}>The pledge</h3>
   <P>Pledge an amount per mile. Whether that's a dime or a dollar, anything helps me push to the finish. You only pay for the miles I actually finish inside my 24-hour goal. Cover all 100 and a $1 pledge turns into $100 for a real cause. The pressure to achieve my goal is exactly what I need to get out the door on the days I'd rather not train. I'll follow up with everyone who pledged once the ultramarathon is done.</P>
   <Button variant="donate" fullWidth={mobile} onClick={onPledge}>Join the pledge</Button>
-  <div style={{display:'grid',gridTemplateColumns:mobile?'1fr 1fr':'repeat(3,auto)',gap:mobile?24:48,marginTop:32,alignItems:'end'}}>
-    <BigNumber size={mobile?'md':'lg'} value="100" caption="miles on Jan 15, 2027" />
-    <BigNumber size={mobile?'md':'lg'} color="ink" value={steps} caption="steps since January 1st"  />
-  </div>
 </section>; }
+function Stats({mobile, stats, strava, instagram}){
+  const items=[['miles',stats.miles,'miles run in training'],['steps',stats.steps,'steps taken'],['hours',stats.hours,'hours on my feet'],['runs',stats.runs,'training runs'],['calories',stats.calories,'calories burned']];
+  const follow=[strava&&['Strava',strava],instagram&&['Instagram',instagram]].filter(Boolean);
+  return <section id="stats" style={{background:'var(--pco-paper-2)'}}><div style={wrap(mobile)}>
+  <H2 m={mobile}>Training stats</H2>
+  <P>Everything logged since January 1st on the way to the start line.</P>
+  <div style={{display:'grid',gridTemplateColumns:mobile?'1fr 1fr':'repeat(3,1fr)',gap:mobile?'28px 16px':'36px 32px',marginTop:28,alignItems:'end'}}>
+    {items.map(([k,v,cap])=><BigNumber key={k} size="md" color={k==='miles'?'navy':'ink'} value={v} caption={cap} />)}
+  </div>
+  {follow.length>0 && <p style={{marginTop:36,fontSize:18,lineHeight:1.55}}>Follow along — training updates live on {follow.map(([l,h],i)=><React.Fragment key={l}>{i>0?' and ':''}<a href={h} target="_blank" rel="noopener" style={{color:'var(--pco-navy)',fontWeight:600}}>{l}</a></React.Fragment>)}.</p>}
+</div></section>; }
 function Why({mobile}){ return <section id="why" style={{background:'var(--pco-paper-2)'}}><div style={wrap(mobile)}>
   <H2 m={mobile}>The why</H2>
   <P>My Uncle Dave is one of the greatest men I know. He's the guy who shows up constantly for his family, for his friends, and anyone who needs a hand. Spending the last 40 years with the United States Coast Guard, there's one word to describe him, and that's selfless.</P>
@@ -61,11 +68,25 @@ function pledgeConfig(){
   const p=(window.PCO_DATA||{}).pledge||{}; const e=p.entries||{}; const isEntry=v=>/^entry\.\d+$/.test(v||'');
   return { ok: !!p.formId && !/[\[\]]/.test(p.formId) && isEntry(e.name) && isEntry(e.email) && isEntry(e.amount), formId:p.formId, entries:e, phoneEnabled:isEntry(e.phone) };
 }
-async function submitPledge({name,email,phone,amount}){
-  const c=pledgeConfig(); if(!c.ok) throw new Error('pledge form not configured');
-  const body=new URLSearchParams(); body.set(c.entries.name,name); body.set(c.entries.email,email); if(c.phoneEnabled&&phone) body.set(c.entries.phone,phone); body.set(c.entries.amount,amount);
-  // Google Forms accepts cross-origin posts but never sends CORS headers, so the response is opaque; a completed request counts as success.
-  await fetch('https://docs.google.com/forms/d/e/'+c.formId+'/formResponse',{method:'POST',mode:'no-cors',body});
+function submitPledge({name,email,phone,amount}){
+  const c=pledgeConfig(); if(!c.ok) return Promise.reject(new Error('pledge form not configured'));
+  // Add ?pledgedebug=1 to the site URL to submit into a visible tab and see Google's actual response page.
+  const debug=/pledgedebug/.test(location.search+location.hash);
+  const fields={[c.entries.name]:name,[c.entries.email]:email,[c.entries.amount]:amount,fvv:'1',pageHistory:'0',fbzx:'-'+Math.floor(Math.random()*1e18)};
+  if(c.phoneEnabled&&phone) fields[c.entries.phone]=phone;
+  return new Promise(resolve=>{
+    const target=debug?'_blank':'pco-pledge-sink-'+Date.now();
+    // A real form submission is exactly what Google's own page sends; the response lands in a hidden frame (cross-origin, so it can't be read).
+    const form=document.createElement('form'); form.method='POST'; form.action='https://docs.google.com/forms/d/e/'+c.formId+'/formResponse'; form.target=target; form.acceptCharset='UTF-8'; form.style.display='none';
+    Object.entries(fields).forEach(([k,v])=>{ const i=document.createElement('input'); i.type='hidden'; i.name=k; i.value=v; form.appendChild(i); });
+    let frame=null, finished=false;
+    const done=()=>{ if(finished) return; finished=true; form.remove(); if(frame) setTimeout(()=>frame.remove(),1500); resolve(); };
+    if(!debug){ frame=document.createElement('iframe'); frame.name=target; frame.style.display='none'; document.body.appendChild(frame); }
+    document.body.appendChild(form); form.submit();
+    // Listen only after submit: the frame's initial about:blank load fires synchronously on insertion and must not count.
+    if(frame) frame.addEventListener('load',done);
+    setTimeout(done, debug?0:4000);
+  });
 }
 function PledgeModal({onClose}){
   const cfg=pledgeConfig(); const contact=(window.PCO_DATA||{}).email||'';
@@ -100,4 +121,4 @@ function PledgeModal({onClose}){
   </div>;
 }
 function StickyDonate({onDonate}){ return <div style={{position:'fixed',left:0,right:0,bottom:0,background:'#fff',borderTop:'1px solid var(--color-border)',padding:12,display:'flex',gap:8,zIndex:10}}><Button variant="donate" fullWidth onClick={()=>onDonate('card')}>Donate</Button><Button variant="secondary" fullWidth onClick={()=>onDonate('venmo')}>Venmo</Button></div>; }
-Object.assign(window,{Cause,Run,Why,DonateModal,PledgeModal,StickyDonate});
+Object.assign(window,{Cause,Run,Stats,Why,DonateModal,PledgeModal,StickyDonate});

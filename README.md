@@ -10,7 +10,7 @@ Static, no build step. Everything in this folder is what gets served.
 5. Custom domain: add a `CNAME` file containing `pisscanceroff.org`, then point the domain's DNS at GitHub Pages (A records 185.199.108.153 / .109 / .110 / .111 and a `www` CNAME to `<user>.github.io`). Tick "Enforce HTTPS" once the certificate is issued.
 
 ## Edit content
-- `js/data.js` — raised amount, goal, step count, charity line, Venmo, email, Strava/Instagram links, pledge-form IDs. This is the only file you need to touch for routine updates.
+- `js/data.js` — raised amount, goal, training stats (miles/steps/hours/runs/calories), charity line, Venmo, email, Strava/Instagram links, pledge-form IDs. This is the only file you need to touch for routine updates.
 - `assets/photos/` — drop `hero.jpg` and `shirt.jpg` (see README there).
 - Copy text lives in `js/sections.jsx` (The cause, The run) and `js/hero.jsx` (headline).
 
@@ -37,6 +37,8 @@ site/
 - `entries.phone` — set `""` to hide the phone field (then email becomes required).
 - In the form's Settings → Responses, keep "Collect email addresses" and "Limit to 1 response" **off** — either one forces a Google sign-in and blocks submissions from the site.
 - Pledge amounts are stored as plain numbers per mile (e.g. `1.00`), so the Sheet can multiply by miles finished.
+- No question in the form should be marked **Required** — the site validates, and Google silently drops a submission that fails a required check.
+- **Debugging:** open the site with `?pledgedebug=1` on the URL (e.g. `https://pisscanceroff.org/?pledgedebug=1`) and submit a pledge. Instead of a hidden submission, Google's response page opens in a new tab: "Your response has been recorded" means it worked; a sign-in prompt or "This is a required question" tells you which form setting is blocking it.
 
 ## Notes
 - React, ReactDOM and Babel load from unpkg (CDN). JSX is compiled in the browser; fine for a one-page site.
