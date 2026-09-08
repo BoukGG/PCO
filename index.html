@@ -29,7 +29,7 @@ function Site(){
     <Footer compact={mobile} logo="assets/logo/horizontal-dark.svg" charityLine={D.charityLine} venmo={D.venmo} email={D.email} style={mobile?{paddingBottom:104}:undefined} />
     {mobile && <StickyDonate onDonate={setModal} />}
     {modal==='pledge' && <PledgeModal mobile={mobile} onClose={()=>setModal(null)} />}
-    {modal && modal!=='pledge' && <DonateModal mode={modal} onClose={()=>setModal(null)} />}
+    {modal && modal!=='pledge' && <DonateModal mode={modal} mobile={mobile} onClose={()=>setModal(null)} />}
   </>;
 }
 ReactDOM.createRoot(document.getElementById('root')).render(<Site />);
