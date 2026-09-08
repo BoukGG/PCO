@@ -14,7 +14,7 @@ function Run({mobile, steps}){ return <section id="run" style={{background:'var(
   <P>Until then I'm training six days a week in the yellow shirt, with the flag in hand. If you see me running through your town, that's on purpose. Say hi.</P>
   <div style={{display:'grid',gridTemplateColumns:mobile?'1fr 1fr':'repeat(3,auto)',gap:mobile?24:48,marginTop:32,alignItems:'end'}}>
     <BigNumber size={mobile?'md':'lg'} value="100" caption="miles on Jan 15, 2027" />
-    <BigNumber size={mobile?'md':'lg'} color="ink" value={steps} caption="steps since January 1st" source="from COROS watch" />
+    <BigNumber size={mobile?'md':'lg'} color="ink" value={steps} caption="steps since January 1st"  />
   </div>
   <div style={{marginTop:28}}><Photo src="assets/photos/shirt.jpg" label="Real photo: the shirt and the flag" style={{aspectRatio:'16/9'}} /></div>
 </div></section>; }
