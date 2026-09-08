@@ -35,9 +35,10 @@ function Why({mobile, onDonate}){ return <section id="why" style={{background:'v
   <P>It pisses me off that I can't do anything about his suffering. I can't take any treatments for my Uncle Dave. That's why I'm focusing on what I can do for him, which is putting in miles as a mobile billboard — raising money and increasing awareness to make sure people fighting battles they never signed up for get some backup. Every mile up until, and including the 100 I'll run on January 15th, is with my Uncle Dave in mind.</P>
   <div style={{marginTop:28}}><Photo src="assets/photos/mom-and-dave.jpeg" label="Real photo: my beautiful mom and my Uncle Dave" style={{aspectRatio:'4/5',maxWidth:mobile?'100%':440}} />
   <p style={{fontSize:14,lineHeight:1.5,color:'var(--color-text-muted)',marginTop:8}}>My beautiful mom and my Uncle Dave at his first chemotherapy treatment this past August.</p></div>
-  <div style={{display:'flex',flexDirection:mobile?'column':'row',gap:12,marginTop:28}}>
+  <div style={{display:'flex',flexDirection:mobile?'column':'row',flexWrap:'wrap',gap:12,marginTop:28}}>
     <Button variant="donate" fullWidth={mobile} onClick={()=>onDonate('card')}>Donate for Uncle Dave</Button>
-    <Button variant="secondary" fullWidth={mobile} onClick={()=>onDonate('pledge')}>Join the pledge</Button>
+    <Button variant="secondary" fullWidth={mobile} onClick={()=>onDonate('venmo')}>Venmo for Uncle Dave</Button>
+    <Button variant="outline" fullWidth={mobile} onClick={()=>onDonate('pledge')}>Join the pledge</Button>
   </div>
 </div></section>; }
 const VENMO_USER='BlakeAnderson3';
