@@ -14,7 +14,7 @@ function Run({mobile, steps, onPledge}){ return <section id="run" style={wrap(mo
   <P>I would be lying if I said I wasn't a bit afraid. I've never run more than 40.</P>
   <P>So until then I'm training six days a week. With thousands of miles to run in preparation, why not be a moving billboard for what's important to me? If you see me running around in that ugly yellow shirt, that's on purpose. Please say hi.</P>
   <h3 id="pledge" style={{fontSize:mobile?22:26,lineHeight:1.2,fontWeight:600,marginTop:36,paddingTop:28,borderTop:'1px solid var(--color-border)',marginBottom:14}}>The pledge</h3>
-  <P>Pledge an amount per mile — a dime, a dollar, anything that works — and you only pay for the miles I actually finish inside my 24-hour goal. Cover all 100 and a $1 pledge turns into $100 for the cause. People counting on every single mile is exactly the pressure I need to get out the door on the days I'd rather not train. I'll follow up with everyone who pledged once the ultramarathon is done.</P>
+  <P>Pledge an amount per mile, whether that's a dime, a dollar, or anything that works. You only pay for the miles I actually finish inside my 24-hour goal. Cover all 100 and a $1 pledge turns into $100 for a real cause. People counting on every single mile is exactly the pressure I need to get out the door on the days I'd rather not train. I'll follow up with everyone who pledged once the ultramarathon is done.</P>
   <Button variant="donate" fullWidth={mobile} onClick={onPledge}>Join the pledge</Button>
   <div style={{display:'grid',gridTemplateColumns:mobile?'1fr 1fr':'repeat(3,auto)',gap:mobile?24:48,marginTop:32,alignItems:'end'}}>
     <BigNumber size={mobile?'md':'lg'} value="100" caption="miles on Jan 15, 2027" />
