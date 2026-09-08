@@ -5,7 +5,7 @@ window.PCO_DATA = {
   steps: "3,096,936",
   charityLine: "Tax-deductible donations are processed by [charity], a registered 501(c)(3), EIN [EIN].",
   venmo: "@BlakeAnderson3",
-  email: "[blake@pisscanceroff.org]",
-  strava: "[https://strava.app.link/BPIZvVURg6b]",
-  instagram: "[instagram profile URL]"
+  email: "blake@pisscanceroff.org",
+  strava: "https://strava.app.link/BPIZvVURg6b",
+  instagram: "" // paste your Instagram profile URL here to show the link
 };
