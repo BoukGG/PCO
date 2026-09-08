@@ -28,13 +28,17 @@ function Stats({mobile, stats, strava, instagram}){
   </div>
   {follow.length>0 && <p style={{marginTop:36,fontSize:18,lineHeight:1.55}}>Follow along — training updates live on {follow.map(([l,h],i)=><React.Fragment key={l}>{i>0?' and ':''}<a href={h} target="_blank" rel="noopener" style={{color:'var(--pco-navy)',fontWeight:600}}>{l}</a></React.Fragment>)}.</p>}
 </div></section>; }
-function Why({mobile}){ return <section id="why" style={{background:'var(--pco-paper-2)'}}><div style={wrap(mobile)}>
+function Why({mobile, onDonate}){ return <section id="why" style={{background:'var(--pco-paper-2)'}}><div style={wrap(mobile)}>
   <H2 m={mobile}>The why</H2>
   <P>My Uncle Dave is one of the greatest men I know. He's the guy who shows up constantly for his family, for his friends, and anyone who needs a hand. Spending the last 40 years with the United States Coast Guard, there's one word to describe him, and that's selfless.</P>
   <P>Right now he's in the fight of his life against bladder cancer, spending five days a week commuting multiple hours to radiation and chemotherapy. I had the privilege to stand by his side during his first treatment, and what I saw was a man who faces a grueling challenge daily, yet with nothing but a smile on his face.</P>
   <P>It pisses me off that I can't do anything about his suffering. I can't take any treatments for my Uncle Dave. That's why I'm focusing on what I can do for him, which is putting in miles as a mobile billboard — raising money and increasing awareness to make sure people fighting battles they never signed up for get some backup. Every mile up until, and including the 100 I'll run on January 15th, is with my Uncle Dave in mind.</P>
   <div style={{marginTop:28}}><Photo src="assets/photos/mom-and-dave.jpeg" label="Real photo: my beautiful mom and my Uncle Dave" style={{aspectRatio:'4/5',maxWidth:mobile?'100%':440}} />
   <p style={{fontSize:14,lineHeight:1.5,color:'var(--color-text-muted)',marginTop:8}}>My beautiful mom and my Uncle Dave at his first chemotherapy treatment this past August.</p></div>
+  <div style={{display:'flex',flexDirection:mobile?'column':'row',gap:12,marginTop:28}}>
+    <Button variant="donate" fullWidth={mobile} onClick={()=>onDonate('card')}>Donate for Uncle Dave</Button>
+    <Button variant="secondary" fullWidth={mobile} onClick={()=>onDonate('pledge')}>Join the pledge</Button>
+  </div>
 </div></section>; }
 const VENMO_USER='BlakeAnderson3';
 const VENMO_NOTE="Please specify where you'd like your money to go - bladder cancer research, disabled veterans, or helping support my Uncle Dave and his family.";
@@ -126,5 +130,5 @@ function PledgeModal({mobile, onClose}){
     </div>
   </div>;
 }
-function StickyDonate({onDonate}){ return <div style={{position:'fixed',left:0,right:0,bottom:0,background:'#fff',borderTop:'1px solid var(--color-border)',padding:12,display:'flex',gap:8,zIndex:10}}><Button variant="donate" fullWidth onClick={()=>onDonate('card')}>Donate</Button><Button variant="secondary" fullWidth onClick={()=>onDonate('venmo')}>Venmo</Button></div>; }
+function StickyDonate({onDonate}){ return <div style={{position:'fixed',left:0,right:0,bottom:0,background:'#fff',borderTop:'1px solid var(--color-border)',padding:12,display:'flex',gap:8,zIndex:10}}><Button variant="donate" fullWidth onClick={()=>onDonate('card')}>Donate</Button><Button variant="secondary" fullWidth onClick={()=>onDonate('venmo')}>Venmo</Button><Button variant="outline" fullWidth onClick={()=>onDonate('pledge')}>Pledge</Button></div>; }
 Object.assign(window,{Cause,Run,Stats,Why,DonateModal,PledgeModal,StickyDonate});

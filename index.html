@@ -23,7 +23,7 @@ function Site(){
   return <>
     <Hero mobile={mobile} raised={D.raised} goal={D.goal} onDonate={setModal} />
     <Cause mobile={mobile} />
-    <Why mobile={mobile} />
+    <Why mobile={mobile} onDonate={setModal} />
     <Run mobile={mobile} onPledge={()=>setModal('pledge')} />
     <Stats mobile={mobile} stats={D.stats} strava={D.strava} instagram={D.instagram} />
     <Footer compact={mobile} logo="assets/logo/horizontal-dark.svg" charityLine={D.charityLine} venmo={D.venmo} email={D.email} style={mobile?{paddingBottom:104}:undefined} />

@@ -12,11 +12,11 @@ function Hero({mobile, raised, goal, onDonate}){
         <h1 style={{color:'#fff',fontSize:mobile?40:64,lineHeight:1.05,fontWeight:700}}>I'm running 100 miles to piss cancer off.</h1>
         <p style={{fontSize:mobile?17:18,lineHeight:1.55,color:'rgba(255,255,255,.85)',marginTop:16,maxWidth:'60ch'}}>January 15, 2027, in Wilmington, NC. Every dollar of this campaign goes to bladder cancer research, disabled veterans, or simply helping support my Uncle Dave.</p>
         <ProgressBar raised={raised} goal={goal} label="raised/pledged" onDark style={{marginTop:28}} />
-        <div id="donate" style={{display:'flex',flexDirection:mobile?'column':'row',flexWrap:'wrap',gap:12,marginTop:24}}>
-          <Button variant="donate" fullWidth={mobile} onClick={()=>onDonate('card')}>Donate - tax-deductible recipt</Button>
-          <Button variant="onDark" fullWidth={mobile} onClick={()=>onDonate('venmo')}>Venmo - quick and easy</Button>
-          <Button variant="onDark" fullWidth={mobile} onClick={()=>onDonate('pledge')}>Join the pledge</Button>
-        </div>
+        {mobile ? <div id="donate" /> : <div id="donate" style={{display:'flex',flexWrap:'wrap',gap:12,marginTop:24}}>
+          <Button variant="donate" onClick={()=>onDonate('card')}>Donate - tax-deductible receipt</Button>
+          <Button variant="onDark" onClick={()=>onDonate('venmo')}>Venmo - quick and easy</Button>
+          <Button variant="onDark" onClick={()=>onDonate('pledge')}>Join the pledge</Button>
+        </div>}
       </div>
     </div>
   </section>;
