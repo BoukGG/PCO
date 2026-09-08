@@ -11,7 +11,7 @@ function Cause({mobile}){ return <section id="cause" style={wrap(mobile)}>
 function Run({mobile, steps}){ return <section id="run" style={{background:'var(--pco-paper-2)'}}><div style={wrap(mobile)}>
   <H2 m={mobile}>The run</H2>
   <P>The Southern Tour Ultra is 100 miles on a loop course in Wilmington, NC. I start at 12pm on January 15, 2027. I've never run more than 40.</P>
-  <P>Until then I'm training six days a week in the yellow shirt, with the flag in hand. If you see me running through your town, that's on purpose. Say hi.</P>
+  <P>Until then I'm training six days a week. If you see me running around in that ugly yellow shirt, that's on purpose. Say hi.</P>
   <div style={{display:'grid',gridTemplateColumns:mobile?'1fr 1fr':'repeat(3,auto)',gap:mobile?24:48,marginTop:32,alignItems:'end'}}>
     <BigNumber size={mobile?'md':'lg'} value="100" caption="miles on Jan 15, 2027" />
     <BigNumber size={mobile?'md':'lg'} color="ink" value={steps} caption="steps since January 1st"  />
