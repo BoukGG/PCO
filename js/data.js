@@ -6,6 +6,6 @@ window.PCO_DATA = {
   charityLine: "Tax-deductible donations are processed by [charity], a registered 501(c)(3), EIN [EIN].",
   venmo: "@BlakeAnderson3",
   email: "[contact email]",
-  strava: "[strava profile URL]",
+  strava: "[https://strava.app.link/BPIZvVURg6b]",
   instagram: "[instagram profile URL]"
 };
