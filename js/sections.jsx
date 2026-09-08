@@ -22,7 +22,7 @@ function Stats({mobile, stats, strava, instagram}){
   const follow=[strava&&['Strava',strava],instagram&&['Instagram',instagram]].filter(Boolean);
   return <section id="stats" style={{background:'var(--pco-paper-2)'}}><div style={wrap(mobile)}>
   <H2 m={mobile}>Training stats</H2>
-  <P>Everything logged since January 1st on the way to the start line.</P>
+  <P>Logged since January 1st, 2026.</P>
   <div style={{display:'grid',gridTemplateColumns:mobile?'1fr 1fr':'repeat(3,1fr)',gap:mobile?'28px 16px':'36px 32px',marginTop:28,alignItems:'end'}}>
     {items.map(([k,v,cap])=><BigNumber key={k} size={mobile?'sm':'md'} color={k==='miles'?'navy':'ink'} value={v} caption={cap} />)}
   </div>
