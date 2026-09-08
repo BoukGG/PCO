@@ -23,6 +23,8 @@ window.PCO_DATA = {
       email: "entry.1680144250",
       phone: "entry.335432418",
       amount: "entry.955689074"
-    }
+    },
+    // The pledge question is multiple choice: these must match its options exactly. Anything else is sent via the form's "Other" option.
+    amountChoices: ["$0.10", "$0.25", "$0.50", "$1.00", "$2.00"]
   }
 };

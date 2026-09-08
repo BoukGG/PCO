@@ -36,7 +36,7 @@ site/
 - `entries.name / email / phone / amount` — the `entry.NNN` id of each question. Get them from ⋮ → "Get pre-filled link": fill every box, Get link, and read the `entry.NNN=` pairs out of the URL (in question order). Empty boxes are left out of the link.
 - `entries.phone` — set `""` to hide the phone field (then email becomes required).
 - In the form's Settings → Responses, keep "Collect email addresses" and "Limit to 1 response" **off** — either one forces a Google sign-in and blocks submissions from the site.
-- Pledge amounts are stored as plain numbers per mile (e.g. `1.00`), so the Sheet can multiply by miles finished.
+- The pledge-per-mile question is **multiple choice**, so the site sends the amount formatted like its options (`$1.00`). `amountChoices` in `data.js` must list those options exactly; an amount not in the list (e.g. the site's $5) is sent through the question's **Other** option, so keep "Other" enabled. If you ever switch that question to Short answer, set `amountChoices: []`.
 - No question in the form should be marked **Required** — the site validates, and Google silently drops a submission that fails a required check.
 - **Debugging:** open the site with `?pledgedebug=1` on the URL (e.g. `https://pisscanceroff.org/?pledgedebug=1`) and submit a pledge. Instead of a hidden submission, Google's response page opens in a new tab: "Your response has been recorded" means it worked; a sign-in prompt or "This is a required question" tells you which form setting is blocking it.
 

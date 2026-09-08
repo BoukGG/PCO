@@ -66,14 +66,18 @@ const PLEDGE_PRESETS=[['0.10','10¢'],['0.25','25¢'],['1','$1'],['2','$2'],['5'
 const money = n => n<1 ? Math.round(n*100)+'¢' : '$'+n.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:2});
 function pledgeConfig(){
   const p=(window.PCO_DATA||{}).pledge||{}; const e=p.entries||{}; const isEntry=v=>/^entry\.\d+$/.test(v||'');
-  return { ok: !!p.formId && !/[\[\]]/.test(p.formId) && isEntry(e.name) && isEntry(e.email) && isEntry(e.amount), formId:p.formId, entries:e, phoneEnabled:isEntry(e.phone) };
+  return { ok: !!p.formId && !/[\[\]]/.test(p.formId) && isEntry(e.name) && isEntry(e.email) && isEntry(e.amount), formId:p.formId, entries:e, phoneEnabled:isEntry(e.phone), amountChoices:Array.isArray(p.amountChoices)?p.amountChoices:[] };
 }
 function submitPledge({name,email,phone,amount}){
   const c=pledgeConfig(); if(!c.ok) return Promise.reject(new Error('pledge form not configured'));
   // Add ?pledgedebug=1 to the site URL to submit into a visible tab and see Google's actual response page.
   const debug=/pledgedebug/.test(location.search+location.hash);
-  const fields={[c.entries.name]:name,[c.entries.email]:email,[c.entries.amount]:amount,fvv:'1',pageHistory:'0',fbzx:'-'+Math.floor(Math.random()*1e18)};
+  const fields={[c.entries.name]:name,[c.entries.email]:email,fvv:'1',pageHistory:'0',fbzx:'-'+Math.floor(Math.random()*1e18)};
   if(c.phoneEnabled&&phone) fields[c.entries.phone]=phone;
+  // Multiple-choice questions only accept an option's exact text; anything else has to go through the "Other" option.
+  const amt='$'+Number(amount).toFixed(2);
+  if(c.amountChoices.length && !c.amountChoices.includes(amt)){ fields[c.entries.amount]='__other_option__'; fields[c.entries.amount+'.other_option_response']=amt; }
+  else fields[c.entries.amount]=amt;
   return new Promise(resolve=>{
     const target=debug?'_blank':'pco-pledge-sink-'+Date.now();
     // A real form submission is exactly what Google's own page sends; the response lands in a hidden frame (cross-origin, so it can't be read).
