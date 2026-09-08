@@ -184,6 +184,8 @@ function Footer({
   charityLine = 'Tax-deductible donations are processed by [charity], a registered 501(c)(3), EIN [EIN].',
   venmo = '@[Venmo handle]',
   email = '[contact email]',
+  strava,
+  instagram,
   donateHref = '#donate',
   venmoHref = '#venmo',
   compact = false,
@@ -219,7 +221,28 @@ function Footer({
       display: 'block',
       marginBottom: 20
     }
-  }), /*#__PURE__*/React.createElement("p", {
+  }), (strava || instagram) && /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 16,
+      lineHeight: 1.5,
+      color: '#fff',
+      margin: '0 0 12px'
+    }
+  }, "Follow along — training updates live on ", strava && /*#__PURE__*/React.createElement("a", {
+    href: strava,
+    target: "_blank",
+    rel: "noopener",
+    style: {
+      color: '#fff'
+    }
+  }, "Strava"), strava && instagram && ' and ', instagram && /*#__PURE__*/React.createElement("a", {
+    href: instagram,
+    target: "_blank",
+    rel: "noopener",
+    style: {
+      color: '#fff'
+    }
+  }, "Instagram"), "."), /*#__PURE__*/React.createElement("p", {
     style: {
       ...muted,
       maxWidth: '60ch',

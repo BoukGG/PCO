@@ -5,7 +5,7 @@ function Photo({label, src, style}){
   return <div style={{background:'#0F1D4A',color:'rgba(255,255,255,.55)',display:'flex',alignItems:'center',justifyContent:'center',font:'400 14px/1.4 var(--font-body)',textAlign:'center',padding:16,borderRadius:6,...style}}>{label}</div>; }
 function Hero({mobile, raised, goal, onDonate}){
   return <section id="top" style={{background:'var(--pco-navy-deep)',color:'#fff'}}>
-    <Nav mobile={mobile} onDark logo="assets/logo/horizontal-light.svg" links={[{label:'The cause',href:'#cause'},{label:'The run',href:'#run'},{label:'Updates',href:'#updates'}]} donateHref="#donate" />
+    <Nav mobile={mobile} onDark logo="assets/logo/horizontal-light.svg" links={[{label:'The cause',href:'#cause'},{label:'The run',href:'#run'},{label:'The why',href:'#why'}]} donateHref="#donate" />
     <div style={{maxWidth:1100,margin:'0 auto',padding:mobile?'24px 16px 40px':'56px 32px 64px',display:'grid',gridTemplateColumns:mobile?'1fr':'1.1fr 1fr',gap:mobile?24:48,alignItems:'center'}}>
       <Photo src="assets/photos/hero.jpg" label="Real photo: Blake mid-run, yellow shirt, flag" style={{aspectRatio:mobile?'4/3':'4/5',order:mobile?0:1}} />
       <div>
