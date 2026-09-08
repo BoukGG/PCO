@@ -24,7 +24,7 @@ function Why({mobile}){ return <section id="why" style={wrap(mobile)}>
   <P>My Uncle Dave is one of the best men I know. He's the guy who shows up — for his family, for his friends, for anyone who needs a hand — and he's spent his whole life doing exactly that without asking for anything back.</P>
   <P>Right now he's in the fight of his life against bladder cancer, spending five days a week in radiation and chemotherapy. He shows up to every session with a smile on his face, and my mom and the rest of the family are right there beside him.</P>
   <P>That's why I'm running. I can't take the treatments for him, but I can put in the miles, raise money, and make sure the people fighting this disease — and the families standing next to them — get some backup. Every mile of this run is for him.</P>
-  <div style={{marginTop:28}}><Photo src="assets/photos/mom-and-dave.jpg" label="Real photo: my beautiful mom and my Uncle Dave" style={{aspectRatio:'4/5',maxWidth:mobile?'100%':440}} />
+  <div style={{marginTop:28}}><Photo src="assets/photos/mom-and-dave.jpeg" label="Real photo: my beautiful mom and my Uncle Dave" style={{aspectRatio:'4/5',maxWidth:mobile?'100%':440}} />
   <p style={{fontSize:14,lineHeight:1.5,color:'var(--color-text-muted)',marginTop:8}}>My beautiful mom and my Uncle Dave.</p></div>
 </section>; }
 function DonateModal({mode, onClose}){
