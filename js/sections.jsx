@@ -5,7 +5,6 @@ const P = ({children}) => <p style={{fontSize:18,lineHeight:1.55,maxWidth:'65ch'
 function Cause({mobile}){ return <section id="overview" style={wrap(mobile)}>
   <H2 m={mobile}>The overview</H2>
   <P>Bladder cancer is the sixth most common cancer in the US and one of the least funded. My Uncle Dave is fighting it right now, spending 5 days a week in Radiation and Chemotherapy.</P>
-  <P>It pisses me off that I can't do much about that. That's why I'm focusing what I can do, I can run, I can raise awareness, and I can ask for support.</P>
   <P>Every dollar I raise during this campaign goes to bladder cancer research, disabled veterans, or directly to helping support my Uncle Dave and his family.</P>
   <P>Tax-deductible donations go through [charity], a registered 501(c)(3). Or Venmo me and I'll follow up with where your money went. Either way, giving what you can means the world.</P>
 </section>; }
@@ -24,7 +23,7 @@ function Why({mobile}){ return <section id="why" style={{background:'var(--pco-p
   <H2 m={mobile}>The why</H2>
   <P>My Uncle Dave is one of the greatest men I know. He's the guy who shows up constantly for his family, for his friends, and anyone who needs a hand. Spending the last 40 years with the United States Coast Guard, there's one word to describe him, and that's selfless.</P>
   <P>Right now he's in the fight of his life against bladder cancer, spending five days a week commuting multiple hours to radiation and chemotherapy. I had the privilege to stand by his side during his first treatment, and what I saw was a man who faces a grueling challenge daily, yet with nothing but a smile on his face.</P>
-  <P>Uncle Dave is why I'm running. I can't take any treatments for him, but I can take steps with him by putting in miles, raising money and awareness, and making sure people fighting battles they didn't sign up for get some backup. Every mile up until and including this 100 mile run is with my Uncle Dave in mind.</P>
+  <P>It pisses me off that I can't do anything about his suffering. I can't take any treatments for my Uncle Dave. That's why I'm focusing on what I can do for him, which is putting in miles as a mobile billboard, raising money and increasing awareness to make sure people fighting battles they never signed up for get some backup. Every mile up until, and including the 100 I'll run on January 15th, is with my Uncle Dave in mind.</P>
   <div style={{marginTop:28}}><Photo src="assets/photos/mom-and-dave.jpeg" label="Real photo: my beautiful mom and my Uncle Dave" style={{aspectRatio:'4/5',maxWidth:mobile?'100%':440}} />
   <p style={{fontSize:14,lineHeight:1.5,color:'var(--color-text-muted)',marginTop:8}}>My beautiful mom and my Uncle Dave at his first chemotherapy treatment this past August.</p></div>
 </div></section>; }
