@@ -10,7 +10,7 @@ Static, no build step. Everything in this folder is what gets served.
 5. Custom domain: add a `CNAME` file containing `pisscanceroff.org`, then point the domain's DNS at GitHub Pages (A records 185.199.108.153 / .109 / .110 / .111 and a `www` CNAME to `<user>.github.io`). Tick "Enforce HTTPS" once the certificate is issued.
 
 ## Edit content
-- `js/data.js` — raised amount, goal, step count, charity line, Venmo, email, training updates. This is the only file you need to touch for routine updates.
+- `js/data.js` — raised amount, goal, step count, charity line, Venmo, email, Strava/Instagram links, pledge-form IDs. This is the only file you need to touch for routine updates.
 - `assets/photos/` — drop `hero.jpg` and `shirt.jpg` (see README there).
 - Copy text lives in `js/sections.jsx` (The cause, The run) and `js/hero.jsx` (headline).
 
@@ -29,6 +29,14 @@ site/
   assets/logo/          all logo variants + favicon
   assets/photos/        your real photos
 ```
+
+## Pledge form (Google Form → Sheet)
+"Join the pledge" in The run section posts each pledge straight into a Google Form you own; responses land in the form's linked Sheet with a timestamp. Visitors never see Google. Config is the `pledge` block in `js/data.js`:
+- `formId` — the long token in the form's public link, between `/d/e/` and `/viewform`.
+- `entries.name / email / phone / amount` — the `entry.NNN` id of each question. Get them from ⋮ → "Get pre-filled link": fill every box, Get link, and read the `entry.NNN=` pairs out of the URL (in question order). Empty boxes are left out of the link.
+- `entries.phone` — set `""` to hide the phone field (then email becomes required).
+- In the form's Settings → Responses, keep "Collect email addresses" and "Limit to 1 response" **off** — either one forces a Google sign-in and blocks submissions from the site.
+- Pledge amounts are stored as plain numbers per mile (e.g. `1.00`), so the Sheet can multiply by miles finished.
 
 ## Notes
 - React, ReactDOM and Babel load from unpkg (CDN). JSX is compiled in the browser; fine for a one-page site.

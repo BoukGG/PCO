@@ -24,10 +24,11 @@ function Site(){
     <Hero mobile={mobile} raised={D.raised} goal={D.goal} onDonate={setModal} />
     <Cause mobile={mobile} />
     <Why mobile={mobile} />
-    <Run mobile={mobile} steps={D.steps} />
+    <Run mobile={mobile} steps={D.steps} onPledge={()=>setModal('pledge')} />
     <Footer compact={mobile} logo="assets/logo/horizontal-dark.svg" charityLine={D.charityLine} venmo={D.venmo} email={D.email} strava={D.strava} instagram={D.instagram} donateHref="#donate" venmoHref="#donate" style={mobile?{paddingBottom:104}:undefined} />
     {mobile && <StickyDonate onDonate={setModal} />}
-    {modal && <DonateModal mode={modal} onClose={()=>setModal(null)} />}
+    {modal==='pledge' && <PledgeModal onClose={()=>setModal(null)} />}
+    {modal && modal!=='pledge' && <DonateModal mode={modal} onClose={()=>setModal(null)} />}
   </>;
 }
 ReactDOM.createRoot(document.getElementById('root')).render(<Site />);
