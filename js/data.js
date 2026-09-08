@@ -1,6 +1,6 @@
 // Edit these numbers and updates; nothing else needs to change.
 window.PCO_DATA = {
-  raised: 0,
+  raised: 50,
   goal: 10000,
   // Race start as one fixed instant (UTC), so every visitor counts down to the same moment: Jan 15, 2027, 12:00 PM Eastern (EST = UTC-5).
   raceStart: "2027-01-15T17:00:00Z",
