@@ -27,6 +27,17 @@ function Why({mobile}){ return <section id="why" style={wrap(mobile)}>
   <div style={{marginTop:28}}><Photo src="assets/photos/mom-and-dave.jpeg" label="Real photo: my beautiful mom and my Uncle Dave" style={{aspectRatio:'4/5',maxWidth:mobile?'100%':440}} />
   <p style={{fontSize:14,lineHeight:1.5,color:'var(--color-text-muted)',marginTop:8}}>My beautiful mom and my Uncle Dave.</p></div>
 </section>; }
+const VENMO_USER='BlakeAnderson3';
+const VENMO_NOTE="Please specify where you'd like your money to go - bladder cancer research, disabled veterans, or helping support my Uncle Dave and his family.";
+function openVenmo(amt){
+  const q='txn=pay&amount='+(amt||'0')+'&note='+encodeURIComponent(VENMO_NOTE);
+  const web='https://venmo.com/'+VENMO_USER+'?'+q;
+  if(!/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)){ window.open(web,'_blank','noopener'); return; }
+  // venmo.com's redirect into the app re-encodes spaces as "+", which the app shows literally; the app's own scheme decodes %20 correctly.
+  const fallback=setTimeout(()=>{ if(!document.hidden) window.location.href=web; },1500);
+  window.addEventListener('pagehide',()=>clearTimeout(fallback),{once:true});
+  window.location.href='venmo://paycharge?'+q+'&recipients='+VENMO_USER;
+}
 function DonateModal({mode, onClose}){
   const [amt,setAmt]=React.useState('50'); const [done,setDone]=React.useState(false);
   return <div onClick={onClose} style={{position:'fixed',inset:0,background:'rgba(17,24,39,.55)',display:'flex',alignItems:'center',justifyContent:'center',padding:16,zIndex:50}}>
@@ -36,7 +47,7 @@ function DonateModal({mode, onClose}){
         <p style={{marginTop:8,fontSize:16,lineHeight:1.55,color:'var(--color-text-muted)'}}>{mode==='venmo'?'Send to @BlakeAnderson3. Please specify where you want your money to go - bladder cancer research, disabled veterans, or supporting my Uncle Dave and his family. I will follow up with where the money went.':'Processed by [charity], a registered 501(c)(3). You get a receipt by email.'}</p>
         <div style={{display:'flex',gap:8,marginTop:20}}>{['25','50','100','250'].map(v=><Button key={v} size="sm" variant={amt===v?'secondary':'outline'} onClick={()=>setAmt(v)} style={{flex:1,fontFamily:'var(--font-display)',fontSize:20}}>${v}</Button>)}</div>
         <Input label="Or a custom amount" prefix="$" value={amt} onChange={e=>setAmt(e.target.value.replace(/[^0-9]/g,''))} style={{marginTop:16}} />
-        <Button variant="donate" fullWidth style={{marginTop:20}} onClick={()=>{ if(mode==='venmo'){ window.open('https://venmo.com/BlakeAnderson3?txn=pay&amount='+(amt||'0')+'&note='+encodeURIComponent("Please specify where you'd like your money to go - bladder cancer research, disabled veterans, or helping support my Uncle Dave and his family."),'_blank','noopener'); } setDone(true); }}>{mode==='venmo'?'Open Venmo':'Give $'+(amt||'0')}</Button>
+        <Button variant="donate" fullWidth style={{marginTop:20}} onClick={()=>{ if(mode==='venmo') openVenmo(amt); setDone(true); }}>{mode==='venmo'?'Open Venmo':'Give $'+(amt||'0')}</Button>
       </>}
     </div>
   </div>;
