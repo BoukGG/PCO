@@ -70,7 +70,7 @@ function openVenmo(amt){
 function DonateModal({mode, onClose}){
   const presets = mode==='venmo' ? ['5','10','25','100'] : ['25','50','100','250'];
   const [amt,setAmt]=React.useState(mode==='venmo' ? '25' : '50'); const [done,setDone]=React.useState(false);
-  const impact = mode==='venmo' ? {'25':"Uncle Dave doesn't need to worry about dinner tonight.",'100':"Uncle Dave doesn't have to worry about lawncare this week."}[amt] : null;
+  const impact = mode==='venmo' ? {'5':"Gas money for that commute to therapy.",'10':"Gas money for that commute to therapy.",'25':"Uncle Dave doesn't need to worry about dinner tonight.",'100':"Uncle Dave doesn't have to worry about lawncare this week."}[amt] : null;
   return <div onClick={onClose} style={{position:'fixed',inset:0,background:'rgba(17,24,39,.55)',display:'flex',alignItems:'center',justifyContent:'center',padding:16,zIndex:50}}>
     <div onClick={e=>e.stopPropagation()} style={{background:'#fff',borderRadius:6,padding:32,width:'100%',maxWidth:440,boxShadow:'0 2px 6px rgba(0,0,0,.08)'}}>
       <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline'}}><h3 style={{fontSize:24,fontWeight:600}}>{mode==='venmo'?'Venmo':'Donate — tax-deductible'}</h3><button onClick={onClose} aria-label="Close" style={{border:0,background:'none',font:'400 24px/1 var(--font-body)',color:'var(--pco-navy)',cursor:'pointer'}}>×</button></div>
