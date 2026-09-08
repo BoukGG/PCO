@@ -40,13 +40,14 @@ function openVenmo(amt){
   window.location.href='venmo://paycharge?'+q+'&recipients='+VENMO_USER;
 }
 function DonateModal({mode, onClose}){
-  const [amt,setAmt]=React.useState('50'); const [done,setDone]=React.useState(false);
+  const presets = mode==='venmo' ? ['5','10','25','100'] : ['25','50','100','250'];
+  const [amt,setAmt]=React.useState(mode==='venmo' ? '25' : '50'); const [done,setDone]=React.useState(false);
   return <div onClick={onClose} style={{position:'fixed',inset:0,background:'rgba(17,24,39,.55)',display:'flex',alignItems:'center',justifyContent:'center',padding:16,zIndex:50}}>
     <div onClick={e=>e.stopPropagation()} style={{background:'#fff',borderRadius:6,padding:32,width:'100%',maxWidth:440,boxShadow:'0 2px 6px rgba(0,0,0,.08)'}}>
       <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline'}}><h3 style={{fontSize:24,fontWeight:600}}>{mode==='venmo'?'Venmo':'Donate — tax-deductible'}</h3><button onClick={onClose} aria-label="Close" style={{border:0,background:'none',font:'400 24px/1 var(--font-body)',color:'var(--pco-navy)',cursor:'pointer'}}>×</button></div>
       {done ? <p style={{marginTop:16,fontSize:18,lineHeight:1.55}}>Thank you. That's ${amt} toward the goal. I'll carry it for 100 miles.</p> : <>
         <p style={{marginTop:8,fontSize:16,lineHeight:1.55,color:'var(--color-text-muted)'}}>{mode==='venmo'?'Send to @BlakeAnderson3. Please specify where you want your money to go - bladder cancer research, disabled veterans, or supporting my Uncle Dave and his family. I will follow up with where the money went.':'Processed by [charity], a registered 501(c)(3). You get a receipt by email.'}</p>
-        <div style={{display:'flex',gap:8,marginTop:20}}>{['25','50','100','250'].map(v=><Button key={v} size="sm" variant={amt===v?'secondary':'outline'} onClick={()=>setAmt(v)} style={{flex:1,fontFamily:'var(--font-display)',fontSize:20}}>${v}</Button>)}</div>
+        <div style={{display:'flex',gap:8,marginTop:20}}>{presets.map(v=><Button key={v} size="sm" variant={amt===v?'secondary':'outline'} onClick={()=>setAmt(v)} style={{flex:1,fontFamily:'var(--font-display)',fontSize:20}}>${v}</Button>)}</div>
         <Input label="Or a custom amount" prefix="$" value={amt} onChange={e=>setAmt(e.target.value.replace(/[^0-9]/g,''))} style={{marginTop:16}} />
         <Button variant="donate" fullWidth style={{marginTop:20}} onClick={()=>{ if(mode==='venmo') openVenmo(amt); setDone(true); }}>{mode==='venmo'?'Open Venmo':'Give $'+(amt||'0')}</Button>
       </>}
