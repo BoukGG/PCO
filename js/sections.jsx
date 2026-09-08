@@ -62,8 +62,8 @@ function DonateModal({mode, onClose}){
     </div>
   </div>;
 }
-const PLEDGE_PRESETS=[['0.10','10¢'],['0.25','25¢'],['1','$1'],['2','$2'],['5','$5']];
-const money = n => n<1 ? Math.round(n*100)+'¢' : '$'+n.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:2});
+const PLEDGE_PRESETS=[['0.10','10¢'],['0.25','25¢'],['1','$1'],['2','$2'],['5','$5'],['other','Other']];
+const money = n => n>0&&n<1 ? Math.round(n*100)+'¢' : '$'+n.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:2});
 function pledgeConfig(){
   const p=(window.PCO_DATA||{}).pledge||{}; const e=p.entries||{}; const isEntry=v=>/^entry\.\d+$/.test(v||'');
   return { ok: !!p.formId && !/[\[\]]/.test(p.formId) && isEntry(e.name) && isEntry(e.email) && isEntry(e.amount), formId:p.formId, entries:e, phoneEnabled:isEntry(e.phone), amountChoices:Array.isArray(p.amountChoices)?p.amountChoices:[] };
@@ -92,13 +92,14 @@ function submitPledge({name,email,phone,amount}){
     setTimeout(done, debug?0:4000);
   });
 }
-function PledgeModal({onClose}){
+function PledgeModal({mobile, onClose}){
   const cfg=pledgeConfig(); const contact=(window.PCO_DATA||{}).email||'';
-  const [amt,setAmt]=React.useState('1'); const [name,setName]=React.useState(''); const [email,setEmail]=React.useState(''); const [phone,setPhone]=React.useState('');
+  const [amt,setAmt]=React.useState('1'); const [custom,setCustom]=React.useState(''); const [name,setName]=React.useState(''); const [email,setEmail]=React.useState(''); const [phone,setPhone]=React.useState('');
   const [status,setStatus]=React.useState('idle'); const [err,setErr]=React.useState('');
-  const perMile=parseFloat(amt); const total=money(perMile*100);
+  const perMile=amt==='other' ? parseFloat(custom) : parseFloat(amt); const shown=perMile>0?perMile:0; const total=money(shown*100);
   const submit=async()=>{
     if(status==='sending') return; setErr('');
+    if(!(perMile>0)) return setErr('Please enter an amount per mile.');
     if(!name.trim()) return setErr('Please add your name so I know who to thank.');
     if(!email.trim() && !(cfg.phoneEnabled && phone.trim())) return setErr(cfg.phoneEnabled ? 'Please add an email or phone number so I can follow up after the run.' : 'Please add your email so I can follow up after the run.');
     if(email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) return setErr("That email doesn't look right.");
@@ -111,9 +112,10 @@ function PledgeModal({onClose}){
   return <div onClick={onClose} style={{position:'fixed',inset:0,background:'rgba(17,24,39,.55)',display:'flex',alignItems:'center',justifyContent:'center',padding:16,zIndex:50}}>
     <div onClick={e=>e.stopPropagation()} style={{background:'#fff',borderRadius:6,padding:32,width:'100%',maxWidth:440,maxHeight:'100%',overflowY:'auto',boxShadow:'0 2px 6px rgba(0,0,0,.08)'}}>
       <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline'}}><h3 style={{fontSize:24,fontWeight:600}}>Join the pledge</h3><button onClick={onClose} aria-label="Close" style={{border:0,background:'none',font:'400 24px/1 var(--font-body)',color:'var(--pco-navy)',cursor:'pointer'}}>×</button></div>
-      {status==='done' ? <p style={{marginTop:16,fontSize:18,lineHeight:1.55}}>You're in. {money(perMile)} per mile — up to {total} if I finish all 100. I'll follow up after January 15. Thank you.</p> : <>
+      {status==='done' ? <p style={{marginTop:16,fontSize:18,lineHeight:1.55}}>You're in. {money(shown)} per mile — up to {total} if I finish all 100. I'll follow up after January 15. Thank you.</p> : <>
         <p style={muted}>Pick an amount per mile I finish inside my 24-hour goal. You only pay for the miles I actually run.</p>
-        <div style={{display:'grid',gridTemplateColumns:'repeat(5,1fr)',gap:8,marginTop:20}}>{PLEDGE_PRESETS.map(([v,l])=><Button key={v} size="sm" variant={amt===v?'secondary':'outline'} onClick={()=>setAmt(v)} style={{minWidth:0,paddingLeft:0,paddingRight:0,fontFamily:'var(--font-display)',fontSize:20}}>{l}</Button>)}</div>
+        <div style={{display:'grid',gridTemplateColumns:mobile?'repeat(3,1fr)':'repeat(6,1fr)',gap:8,marginTop:20}}>{PLEDGE_PRESETS.map(([v,l])=><Button key={v} size="sm" variant={amt===v?'secondary':'outline'} onClick={()=>setAmt(v)} style={{minWidth:0,paddingLeft:0,paddingRight:0,fontFamily:'var(--font-display)',fontSize:20}}>{l}</Button>)}</div>
+        {amt==='other' && <Input label="Your amount per mile" prefix="$" inputMode="decimal" value={custom} onChange={e=>setCustom(e.target.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g,'$1'))} style={{marginTop:12}} />}
         <p style={{...muted,marginTop:12}}>If I finish all 100 miles, that's <strong style={{color:'var(--pco-navy)'}}>{total}</strong>.</p>
         <Input label="Name" value={name} onChange={e=>setName(e.target.value)} style={{marginTop:16}} />
         <Input label="Email" type="email" value={email} onChange={e=>setEmail(e.target.value)} style={{marginTop:12}} />
