@@ -25,7 +25,7 @@ function Countdown({mobile, target}){
   const parts=[[Math.floor(s/86400),'days'],[Math.floor(s/3600)%24,'hours'],[Math.floor(s/60)%60,'minutes'],[s%60,'seconds']];
   const pad=n=>String(n).padStart(2,'0');
   return <div style={{marginTop:36,padding:mobile?'20px 16px':'24px 28px',background:'var(--pco-navy-deep)',borderRadius:6,color:'#fff'}}>
-    <div style={{fontSize:14,lineHeight:1.4,color:'rgba(255,255,255,.75)',marginBottom:12}}>{left>0?'Countdown to the start line — Jan 15, 2027, 12:00 PM ET':'The run has started. Follow along on Strava.'}</div>
+    <div style={{fontSize:14,lineHeight:1.4,color:'rgba(255,255,255,.75)',marginBottom:12}}>{left>0?'Countdown to the 100 miler on January 15th':'The run has started. Follow along on Strava.'}</div>
     <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:mobile?8:16}}>
       {parts.map(([v,l])=><div key={l}><div style={{fontFamily:'var(--font-display)',fontWeight:700,fontSize:mobile?36:56,lineHeight:1,color:'#fff'}}>{l==='days'?v:pad(v)}</div><div style={{fontSize:13,color:'rgba(255,255,255,.75)',marginTop:6}}>{v===1?l.slice(0,-1):l}</div></div>)}
     </div>
