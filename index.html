@@ -24,8 +24,8 @@ function Site(){
     <Hero mobile={mobile} raised={D.raised} goal={D.goal} onDonate={setModal} />
     <Cause mobile={mobile} />
     <Run mobile={mobile} steps={D.steps} />
-    <Updates mobile={mobile} items={D.updates} />
-    <Footer compact={mobile} logo="assets/logo/horizontal-dark.svg" charityLine={D.charityLine} venmo={D.venmo} email={D.email} donateHref="#donate" venmoHref="#donate" style={mobile?{paddingBottom:104}:undefined} />
+    <Why mobile={mobile} />
+    <Footer compact={mobile} logo="assets/logo/horizontal-dark.svg" charityLine={D.charityLine} venmo={D.venmo} email={D.email} strava={D.strava} instagram={D.instagram} donateHref="#donate" venmoHref="#donate" style={mobile?{paddingBottom:104}:undefined} />
     {mobile && <StickyDonate onDonate={setModal} />}
     {modal && <DonateModal mode={modal} onClose={()=>setModal(null)} />}
   </>;

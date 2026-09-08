@@ -1,4 +1,4 @@
-const { Button, BigNumber, UpdateItem, Badge, Footer, Input } = window.PissCancerOffDesignSystem_99f843;
+const { Button, BigNumber, Footer, Input } = window.PissCancerOffDesignSystem_99f843;
 const wrap = m => ({maxWidth:720,margin:'0 auto',padding:m?'40px 16px':'64px 32px'});
 const H2 = ({m,children}) => <h2 style={{fontSize:m?28:36,lineHeight:1.15,fontWeight:600,marginBottom:20}}>{children}</h2>;
 const P = ({children}) => <p style={{fontSize:18,lineHeight:1.55,maxWidth:'65ch',marginBottom:16}}>{children}</p>;
@@ -19,9 +19,13 @@ function Run({mobile, steps}){ return <section id="run" style={{background:'var(
   </div>
   <div style={{marginTop:28}}><Photo src="assets/photos/shirt.jpg" label="Real photo: the shirt and the flag" style={{aspectRatio:'16/9'}} /></div>
 </div></section>; }
-function Updates({mobile, items}){ return <section id="updates" style={wrap(mobile)}>
-  <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:16}}><H2 m={mobile}>Training updates</H2><Badge>Week 14 of 32</Badge></div>
-  <div>{items.map((u,i)=><UpdateItem key={i} {...u} last={i===items.length-1} />)}</div>
+function Why({mobile}){ return <section id="why" style={wrap(mobile)}>
+  <H2 m={mobile}>The why</H2>
+  <P>My Uncle Dave is one of the best men I know. He's the guy who shows up — for his family, for his friends, for anyone who needs a hand — and he's spent his whole life doing exactly that without asking for anything back.</P>
+  <P>Right now he's in the fight of his life against bladder cancer, spending five days a week in radiation and chemotherapy. He shows up to every session with a smile on his face, and my mom and the rest of the family are right there beside him.</P>
+  <P>That's why I'm running. I can't take the treatments for him, but I can put in the miles, raise money, and make sure the people fighting this disease — and the families standing next to them — get some backup. Every mile of this run is for him.</P>
+  <div style={{marginTop:28}}><Photo src="assets/photos/mom-and-dave.jpeg" label="Real photo: my beautiful mom and my Uncle Dave" style={{aspectRatio:'4/5',maxWidth:mobile?'100%':440}} />
+  <p style={{fontSize:14,lineHeight:1.5,color:'var(--color-text-muted)',marginTop:8}}>My beautiful mom and my Uncle Dave.</p></div>
 </section>; }
 function DonateModal({mode, onClose}){
   const [amt,setAmt]=React.useState('50'); const [done,setDone]=React.useState(false);
@@ -38,4 +42,4 @@ function DonateModal({mode, onClose}){
   </div>;
 }
 function StickyDonate({onDonate}){ return <div style={{position:'fixed',left:0,right:0,bottom:0,background:'#fff',borderTop:'1px solid var(--color-border)',padding:12,display:'flex',gap:8,zIndex:10}}><Button variant="donate" fullWidth onClick={()=>onDonate('card')}>Donate</Button><Button variant="secondary" fullWidth onClick={()=>onDonate('venmo')}>Venmo</Button></div>; }
-Object.assign(window,{Cause,Run,Updates,DonateModal,StickyDonate});
+Object.assign(window,{Cause,Run,Why,DonateModal,StickyDonate});
