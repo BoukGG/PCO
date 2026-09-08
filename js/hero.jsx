@@ -14,7 +14,7 @@ function Hero({mobile, raised, goal, onDonate}){
         <ProgressBar raised={raised} goal={goal} onDark style={{marginTop:28}} />
         <div id="donate" style={{display:'flex',flexDirection:mobile?'column':'row',gap:12,marginTop:24}}>
           <Button variant="donate" fullWidth={mobile} onClick={()=>onDonate('card')}>Donate — tax-deductible</Button>
-          <Button variant="onDark" fullWidth={mobile} onClick={()=>onDonate('venmo')}>Venmo — no paperwork</Button>
+          <Button variant="onDark" fullWidth={mobile} onClick={()=>onDonate('venmo')}>Venmo - pick one</Button>
         </div>
       </div>
     </div>
