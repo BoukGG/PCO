@@ -186,8 +186,6 @@ function Footer({
   email = '[contact email]',
   strava,
   instagram,
-  donateHref = '#donate',
-  venmoHref = '#venmo',
   compact = false,
   style
 }) {
@@ -209,7 +207,7 @@ function Footer({
       maxWidth: 1100,
       margin: '0 auto',
       display: 'grid',
-      gridTemplateColumns: compact ? '1fr' : '1fr auto',
+      gridTemplateColumns: '1fr',
       gap: 32,
       alignItems: 'start'
     }
@@ -263,19 +261,7 @@ function Footer({
       ...muted,
       margin: '10px 0 0'
     }
-  }, "Colors from the bladder cancer awareness ribbon.")), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      gap: 12,
-      flexWrap: 'wrap'
-    }
-  }, /*#__PURE__*/React.createElement(__ds_scope.Button, {
-    variant: "donate",
-    href: donateHref
-  }, "Donate \u2014 tax-deductible"), /*#__PURE__*/React.createElement(__ds_scope.Button, {
-    variant: "onDark",
-    href: venmoHref
-  }, "Venmo \u2014 no paperwork"))));
+  }, "Colors from the bladder cancer awareness ribbon."))));
 }
 Object.assign(__ds_scope, { Footer });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "components/core/Footer.jsx", error: String((e && e.message) || e) }); }

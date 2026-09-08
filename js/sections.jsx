@@ -20,7 +20,6 @@ function Run({mobile, steps, onPledge}){ return <section id="run" style={wrap(mo
     <BigNumber size={mobile?'md':'lg'} value="100" caption="miles on Jan 15, 2027" />
     <BigNumber size={mobile?'md':'lg'} color="ink" value={steps} caption="steps since January 1st"  />
   </div>
-  <div style={{marginTop:28}}><Photo src="assets/photos/shirt.jpg" label="Real photo: the shirt and the flag" style={{aspectRatio:'16/9'}} /></div>
 </section>; }
 function Why({mobile}){ return <section id="why" style={{background:'var(--pco-paper-2)'}}><div style={wrap(mobile)}>
   <H2 m={mobile}>The why</H2>
