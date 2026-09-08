@@ -24,7 +24,7 @@ function Countdown({mobile, target}){
   const left=Math.max(0,t-now); const s=Math.floor(left/1000);
   const parts=[[Math.floor(s/86400),'days'],[Math.floor(s/3600)%24,'hours'],[Math.floor(s/60)%60,'minutes'],[s%60,'seconds']];
   const pad=n=>String(n).padStart(2,'0');
-  return <div style={{marginTop:24,marginBottom:36,padding:mobile?'20px 16px':'24px 28px',background:'var(--pco-navy-deep)',borderRadius:6,color:'#fff'}}>
+  return <div style={{marginTop:36,padding:mobile?'20px 16px':'24px 28px',background:'var(--pco-navy-deep)',borderRadius:6,color:'#fff'}}>
     <div style={{fontSize:14,lineHeight:1.4,color:'rgba(255,255,255,.75)',marginBottom:12}}>{left>0?'Countdown to the start line — Jan 15, 2027, 12:00 PM ET':'The run has started. Follow along on Strava.'}</div>
     <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:mobile?8:16}}>
       {parts.map(([v,l])=><div key={l}><div style={{fontFamily:'var(--font-display)',fontWeight:700,fontSize:mobile?36:56,lineHeight:1,color:'#fff'}}>{l==='days'?v:pad(v)}</div><div style={{fontSize:13,color:'rgba(255,255,255,.75)',marginTop:6}}>{v===1?l.slice(0,-1):l}</div></div>)}
@@ -36,12 +36,12 @@ function Stats({mobile, stats, raceStart, strava, instagram}){
   const follow=[strava&&['Strava',strava],instagram&&['Instagram',instagram]].filter(Boolean);
   return <section id="stats" style={{background:'var(--pco-paper-2)'}}><div style={wrap(mobile)}>
   <H2 m={mobile}>Training stats</H2>
-  {raceStart && <Countdown mobile={mobile} target={raceStart} />}
   <P>Logged since January 1st, 2026.</P>
   <div style={{display:'grid',gridTemplateColumns:mobile?'1fr 1fr':'repeat(3,1fr)',gap:mobile?'28px 16px':'36px 32px',marginTop:28,alignItems:'end'}}>
     {items.map(([k,v,cap])=><BigNumber key={k} size={mobile?'sm':'md'} color={k==='miles'?'navy':'ink'} value={v} caption={cap} />)}
   </div>
   {follow.length>0 && <p style={{marginTop:36,fontSize:18,lineHeight:1.55}}>Follow along — training updates live on {follow.map(([l,h],i)=><React.Fragment key={l}>{i>0?' and ':''}<a href={h} target="_blank" rel="noopener" style={{color:'var(--pco-navy)',fontWeight:600}}>{l}</a></React.Fragment>)}.</p>}
+  {raceStart && <Countdown mobile={mobile} target={raceStart} />}
 </div></section>; }
 function Why({mobile, onDonate}){ return <section id="why" style={{background:'var(--pco-paper-2)'}}><div style={wrap(mobile)}>
   <H2 m={mobile}>The why</H2>
