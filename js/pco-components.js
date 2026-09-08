@@ -751,7 +751,6 @@ function Run({
     color: "ink",
     value: steps,
     caption: "steps since January 1st",
-    source: "from COROS watch"
   }), /*#__PURE__*/React.createElement(BigNumber, {
     size: mobile ? 'md' : 'lg',
     color: "ink",
