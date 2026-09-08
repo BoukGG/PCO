@@ -32,7 +32,7 @@ function DonateModal({mode, onClose}){
         <p style={{marginTop:8,fontSize:16,lineHeight:1.55,color:'var(--color-text-muted)'}}>{mode==='venmo'?'Send to @BlakeAnderson3. Please specify where you want your money to go - bladder cancer research, disabled veterans, or supporting my Uncle Dave and his family. I will follow up with where the money went.':'Processed by [charity], a registered 501(c)(3). You get a receipt by email.'}</p>
         <div style={{display:'flex',gap:8,marginTop:20}}>{['25','50','100','250'].map(v=><Button key={v} size="sm" variant={amt===v?'secondary':'outline'} onClick={()=>setAmt(v)} style={{flex:1,fontFamily:'var(--font-display)',fontSize:20}}>${v}</Button>)}</div>
         <Input label="Or a custom amount" prefix="$" value={amt} onChange={e=>setAmt(e.target.value.replace(/[^0-9]/g,''))} style={{marginTop:16}} />
-        <Button variant="donate" fullWidth style={{marginTop:20}} onClick={()=>{ if(mode==='venmo'){ window.open('https://venmo.com/BlakeAnderson3?txn=pay&amount='+(amt||'0')+'&note='+encodeURIComponent('PCO'),'_blank','noopener'); } setDone(true); }}>{mode==='venmo'?'Open Venmo':'Give $'+(amt||'0')}</Button>
+        <Button variant="donate" fullWidth style={{marginTop:20}} onClick={()=>{ if(mode==='venmo'){ window.open('https://venmo.com/BlakeAnderson3?txn=pay&amount='+(amt||'0')+'&note='+encodeURIComponent("Please specify where you'd like your money to go - bladder cancer research, disabled veterans, or helping support my Uncle Dave and his family."),'_blank','noopener'); } setDone(true); }}>{mode==='venmo'?'Open Venmo':'Give $'+(amt||'0')}</Button>
       </>}
     </div>
   </div>;
