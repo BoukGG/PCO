@@ -13,7 +13,7 @@ function Run({mobile, steps, onPledge}){ return <section id="run" style={wrap(mo
   <P>The Southern Tour Ultra is 100 miles on a loop course in Wilmington, NC. I start at 12pm on January 15, 2027.</P>
   <P>I would be lying if I said I wasn't a bit afraid. I've never run more than 40.</P>
   <P>So until then I'm training six days a week. With thousands of miles to run in preparation, why not be a moving billboard for what's important to me? If you see me running around in that ugly yellow shirt, that's on purpose. Please say hi.</P>
-  <P>Here's another way to back me, with a catch that works in your favor: pledge an amount per mile — a dime, a dollar, whatever fits — and you only pay for the miles I actually finish inside my 24-hour goal. Cover all 100 and a $1 pledge turns into $100 for the cause. Knowing people are counting on every single mile is exactly the kind of pressure that gets me out the door on the days I'd rather not train. I'll follow up with everyone who pledged once the run is done.</P>
+  <P>Pledge an amount per mile — a dime, a dollar, anything that works — and you only pay for the miles I actually finish inside my 24-hour goal. Cover all 100 and a $1 pledge turns into $100 for the cause. People counting on every single mile is exactly the pressure I need to get out the door on the days I'd rather not train. I'll follow up with everyone who pledged once the ultramarathon is done.</P>
   <Button variant="donate" fullWidth={mobile} onClick={onPledge}>Join the pledge</Button>
   <div style={{display:'grid',gridTemplateColumns:mobile?'1fr 1fr':'repeat(3,auto)',gap:mobile?24:48,marginTop:32,alignItems:'end'}}>
     <BigNumber size={mobile?'md':'lg'} value="100" caption="miles on Jan 15, 2027" />
