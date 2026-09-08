@@ -5,9 +5,9 @@ const P = ({children}) => <p style={{fontSize:18,lineHeight:1.55,maxWidth:'65ch'
 function Cause({mobile}){ return <section id="cause" style={wrap(mobile)}>
   <H2 m={mobile}>The cause</H2>
   <P>Bladder cancer is the sixth most common cancer in the US and one of the least funded. My Uncle Dave is fighting it right now, spending 5 days a week in Radiation and Chemotherapy.</P>
-  <P>It pisses me off that I can't do much about that from the road, but I can run, I can raise awareness, and I can ask for support.</P>
-  <P>Every dollar goes to bladder cancer research, disabled veterans, or directly to helping support my Uncle Dave and his family.</P>
-  <P>Tax-deductible donations go through [charity], a registered 501(c)(3). Or Venmo me and I'll tell you where your money went. Either way, giving what you can would mean the world to me.</P>
+  <P>It pisses me off that I can't do much about that. That's why I'm focusing what I can do, I can run, I can raise awareness, and I can ask for support.</P>
+  <P>Every dollar I raise during this campaign goes to bladder cancer research, disabled veterans, or directly to helping support my Uncle Dave and his family.</P>
+  <P>Tax-deductible donations go through [charity], a registered 501(c)(3). Or Venmo me and I'll follow up with where your money went. Either way, giving what you can means the world.</P>
 </section>; }
 function Run({mobile, steps}){ return <section id="run" style={{background:'var(--pco-paper-2)'}}><div style={wrap(mobile)}>
   <H2 m={mobile}>The run</H2>
