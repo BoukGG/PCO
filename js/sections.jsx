@@ -11,8 +11,9 @@ function Cause({mobile}){ return <section id="cause" style={wrap(mobile)}>
 </section>; }
 function Run({mobile, steps}){ return <section id="run" style={{background:'var(--pco-paper-2)'}}><div style={wrap(mobile)}>
   <H2 m={mobile}>The run</H2>
-  <P>The Southern Tour Ultra is 100 miles on a loop course in Wilmington, NC. I start at 12pm on January 15, 2027. I've never run more than 40.</P>
-  <P>Until then I'm training six days a week. If you see me running around in that ugly yellow shirt, that's on purpose. Say hi.</P>
+  <P>The Southern Tour Ultra is 100 miles on a loop course in Wilmington, NC. I start at 12pm on January 15, 2027.</P>
+  <P>I would be lying if I said I wasn't a bit afraid. I've never run more than 40.</P>
+  <P>So until then I'm training six days a week. With thousands of miles to run in preparation, why not be a moving billboard for what's important to me? If you see me running around in that ugly yellow shirt, that's on purpose. Please say hi.</P>
   <div style={{display:'grid',gridTemplateColumns:mobile?'1fr 1fr':'repeat(3,auto)',gap:mobile?24:48,marginTop:32,alignItems:'end'}}>
     <BigNumber size={mobile?'md':'lg'} value="100" caption="miles on Jan 15, 2027" />
     <BigNumber size={mobile?'md':'lg'} color="ink" value={steps} caption="steps since January 1st"  />
@@ -21,9 +22,9 @@ function Run({mobile, steps}){ return <section id="run" style={{background:'var(
 </div></section>; }
 function Why({mobile}){ return <section id="why" style={wrap(mobile)}>
   <H2 m={mobile}>The why</H2>
-  <P>My Uncle Dave is one of the best men I know. He's the guy who shows up — for his family, for his friends, for anyone who needs a hand — and he's spent his whole life doing exactly that without asking for anything back.</P>
-  <P>Right now he's in the fight of his life against bladder cancer, spending five days a week in radiation and chemotherapy. He shows up to every session with a smile on his face, and my mom and the rest of the family are right there beside him.</P>
-  <P>That's why I'm running. I can't take the treatments for him, but I can put in the miles, raise money, and make sure the people fighting this disease — and the families standing next to them — get some backup. Every mile of this run is for him.</P>
+  <P>My Uncle Dave is one of the greatest men I know. He's the guy who shows up constantly for his family, for his friends, and anyone who needs a hand. Spending the last 40 years with the United States Coast Guard, there's one word to describe him , and that's selfless.</P>
+  <P>Right now he's in the fight of his life against bladder cancer, spending five days a week commuting multiple hours to radiation and chemotherapy. I had the privilege to stand by his side during his first treatment, and what I saw was a man who faces a grueling challenge daily, yet with nothing but a smile on his face.</P>
+  <P>Uncle Dave is why I'm running. I can't take any treatments for him, but I can take steps with him by putting in miles, raising money and awareness, and making sure people fighting battles they didn't sign up for get some backup. Every mile up until and including this 100 mile run is with my Uncle Dave in mind.</P>
   <div style={{marginTop:28}}><Photo src="assets/photos/mom-and-dave.jpeg" label="Real photo: my beautiful mom and my Uncle Dave" style={{aspectRatio:'4/5',maxWidth:mobile?'100%':440}} />
   <p style={{fontSize:14,lineHeight:1.5,color:'var(--color-text-muted)',marginTop:8}}>My beautiful mom and my Uncle Dave.</p></div>
 </section>; }
