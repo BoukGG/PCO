@@ -22,11 +22,11 @@ function Run({mobile, steps}){ return <section id="run" style={{background:'var(
 </div></section>; }
 function Why({mobile}){ return <section id="why" style={wrap(mobile)}>
   <H2 m={mobile}>The why</H2>
-  <P>My Uncle Dave is one of the greatest men I know. He's the guy who shows up constantly for his family, for his friends, and anyone who needs a hand. Spending the last 40 years with the United States Coast Guard, there's one word to describe him , and that's selfless.</P>
+  <P>My Uncle Dave is one of the greatest men I know. He's the guy who shows up constantly for his family, for his friends, and anyone who needs a hand. Spending the last 40 years with the United States Coast Guard, there's one word to describe him, and that's selfless.</P>
   <P>Right now he's in the fight of his life against bladder cancer, spending five days a week commuting multiple hours to radiation and chemotherapy. I had the privilege to stand by his side during his first treatment, and what I saw was a man who faces a grueling challenge daily, yet with nothing but a smile on his face.</P>
   <P>Uncle Dave is why I'm running. I can't take any treatments for him, but I can take steps with him by putting in miles, raising money and awareness, and making sure people fighting battles they didn't sign up for get some backup. Every mile up until and including this 100 mile run is with my Uncle Dave in mind.</P>
   <div style={{marginTop:28}}><Photo src="assets/photos/mom-and-dave.jpeg" label="Real photo: my beautiful mom and my Uncle Dave" style={{aspectRatio:'4/5',maxWidth:mobile?'100%':440}} />
-  <p style={{fontSize:14,lineHeight:1.5,color:'var(--color-text-muted)',marginTop:8}}>My beautiful mom and my Uncle Dave.</p></div>
+  <p style={{fontSize:14,lineHeight:1.5,color:'var(--color-text-muted)',marginTop:8}}>My beautiful mom and my Uncle Dave at his first Chemoteraphy treatment this past August.</p></div>
 </section>; }
 function DonateModal({mode, onClose}){
   const [amt,setAmt]=React.useState('50'); const [done,setDone]=React.useState(false);
