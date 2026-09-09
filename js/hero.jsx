@@ -2,7 +2,7 @@ const { Button, ProgressBar, Nav } = window.PissCancerOffDesignSystem_99f843;
 function Photo({label, src, style}){
   const [ok,setOk]=React.useState(true);
   if(src && ok) return <img src={src} alt={label} onError={()=>setOk(false)} style={{display:'block',width:'100%',objectFit:'cover',borderRadius:6,...style}} />;
-  return <div style={{background:'#0F1D4A',color:'rgba(255,255,255,.55)',display:'flex',alignItems:'center',justifyContent:'center',font:'400 14px/1.4 var(--font-body)',textAlign:'center',padding:16,borderRadius:6,...style}}>{label}</div>; }
+  return <div aria-label={label} style={{background:'#0F1D4A',borderRadius:6,...style}} />; }
 function Hero({mobile, raised, goal, onDonate}){
   return <section id="top" style={{background:'var(--pco-navy-deep)',color:'#fff'}}>
     <Nav mobile={mobile} onDark logo="assets/logo/horizontal-light.svg" links={[{label:'The overview',href:'#overview'},{label:'The why',href:'#why'},{label:'The run/pledge',href:'#run'},{label:'Training stats',href:'#stats'}]} donateHref="#donate" />
