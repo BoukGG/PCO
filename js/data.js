@@ -6,11 +6,11 @@ window.PCO_DATA = {
   raceStart: "2027-01-15T17:00:00Z",
   // Training stats section. Plain strings, formatted however you want them shown.
   stats: {
-    miles: "1,160",
-    steps: "3,096,936",
-    hours: "201",
-    runs: "178",
-    calories: "191,100"
+    miles: "1,168",
+    steps: "3,112,518",
+    hours: "202.4",
+    runs: "179",
+    calories: "192,141"
   },
   charityLine: "Tax-deductible donations are processed by [charity], a registered 501(c)(3), EIN [EIN].",
   venmo: "@BlakeAnderson3",
