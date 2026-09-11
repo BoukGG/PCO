@@ -6,10 +6,10 @@ window.PCO_DATA = {
   raceStart: "2027-01-15T17:00:00Z",
   // Training stats section. Plain strings, formatted however you want them shown.
   stats: {
-    miles: "1,182.3",
-    steps: "3,143,830",
-    hours: "204.8",
-    runs: "181"
+    miles: "1,185",
+    steps: "3,153,544",
+    hours: "205.3",
+    runs: "182"
   },
   charity: { name: "UNC Health Foundation", fund: "Matthew I. Milowsky, MD Fund for Genitourinary Oncology" },
   givingUrl: "", // paste the UNC giving link here when it's live; the Give button switches on automatically
