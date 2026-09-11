@@ -395,7 +395,7 @@ function Nav({
       color: onDark ? '#fff' : 'var(--pco-navy)',
       textDecoration: 'none'
     }
-  }, l.label)), /*#__PURE__*/React.createElement(__ds_scope.Button, {
+  }, l.label)), donateHref && /*#__PURE__*/React.createElement(__ds_scope.Button, {
     variant: "donate",
     size: mobile ? 'sm' : 'md',
     href: donateHref

@@ -187,5 +187,5 @@ function PledgeModal({mobile, onClose}){
     </div>
   </div>;
 }
-function StickyDonate({onDonate}){ return <div style={{position:'fixed',left:0,right:0,bottom:0,background:'#fff',borderTop:'1px solid var(--color-border)',padding:12,display:'flex',gap:8,zIndex:10}}><Button variant="donate" fullWidth onClick={()=>onDonate('card')}>Donate</Button><Button variant="secondary" fullWidth onClick={()=>onDonate('venmo')}>Venmo</Button><Button variant="outline" fullWidth onClick={()=>onDonate('pledge')}>Pledge</Button></div>; }
+function StickyDonate(){ return <div style={{position:'fixed',left:0,right:0,bottom:0,background:'#fff',borderTop:'1px solid var(--color-border)',padding:12,zIndex:10}}><Button variant="donate" fullWidth href="#give">Ways to give</Button></div>; }
 Object.assign(window,{Cause,Give,Stats,Why,DonateModal,PledgeModal,StickyDonate});

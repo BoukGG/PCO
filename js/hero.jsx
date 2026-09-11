@@ -5,7 +5,7 @@ function Photo({label, src, fit='cover', style}){
   return <div aria-label={label} style={{background:'#0F1D4A',borderRadius:6,...style}} />; }
 function Hero({mobile, raised, goal, onDonate}){
   return <section id="top" style={{background:'var(--pco-navy-deep)',color:'#fff'}}>
-    <Nav mobile={mobile} onDark logo="assets/logo/horizontal-light.svg" links={[{label:'The overview',href:'#overview'},{label:'The why',href:'#why'},{label:'Ways to give',href:'#give'},{label:'Training stats',href:'#stats'}]} donateHref="#give" />
+    <Nav mobile={mobile} onDark logo="assets/logo/horizontal-light.svg" links={[{label:'The overview',href:'#overview'},{label:'The why',href:'#why'},{label:'Ways to give',href:'#give'},{label:'Training stats',href:'#stats'}]} donateHref={mobile?null:'#give'} />
     <div style={{maxWidth:1100,margin:'0 auto',padding:mobile?'24px 16px 40px':'56px 32px 64px',display:'grid',gridTemplateColumns:mobile?'1fr':'1.1fr 1fr',gap:mobile?24:48,alignItems:'center'}}>
       <Photo src="assets/photos/pisscanceroff_shirt_transparent.png" fit="contain" label="The PissCancerOff shirt" style={{aspectRatio:'8/7',order:mobile?0:1}} />
       <div>
