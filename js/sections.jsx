@@ -19,7 +19,7 @@ function Give({mobile, onDonate}){ return <section id="give" style={wrap(mobile)
   <P>Tax-deductible donations go through the UNC Health Foundation, a registered 501(c)(3), and support the Matthew I. Milowsky, MD Fund for Genitourinary Oncology.</P>
   <Button variant="donate" fullWidth={mobile} onClick={()=>onDonate('card')}>Donate (tax-deductible)</Button>
   <H3 m={mobile} id="venmo" divider>Quick and easy (Venmo)</H3>
-  {/* paragraph coming */}
+  <P>I am accepting Venmo donations as a quick way to simply bypass the need to enter your payment information. In your Venmo donation description please specify where you'd like your money to go, whether that is the UNC Health Foundation, disabled veterans, or simply helping support my Uncle Dave and his family. Zelle transactions will work as well to my phone number (972) 352-9711.</P>
   <Button variant="secondary" fullWidth={mobile} onClick={()=>onDonate('venmo')}>Venmo @BlakeAnderson3</Button>
 </section>; }
 function Countdown({mobile, target}){
