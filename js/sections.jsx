@@ -4,15 +4,14 @@ const H2 = ({m,children}) => <h2 style={{fontSize:m?28:36,lineHeight:1.15,fontWe
 const P = ({children}) => <p style={{fontSize:18,lineHeight:1.55,maxWidth:'65ch',marginBottom:16}}>{children}</p>;
 function Cause({mobile}){ return <section id="overview" style={wrap(mobile)}>
   <H2 m={mobile}>The overview</H2>
-  <P>Bladder cancer is the sixth most common cancer in the US and one of the least funded. My Uncle Dave is fighting it right now, spending 5 days a week in Radiation and Chemotherapy.</P>
-  <P>Every dollar I raise during this campaign goes to bladder cancer research, disabled veterans, or directly to helping support my Uncle Dave and his family.</P>
-  <P>Tax-deductible donations go through [charity], a registered 501(c)(3). Or Venmo me and I'll follow up with where your money went. Either way, giving what you can means the world.</P>
+  <P>Bladder cancer is the sixth most common cancer in the US yet also one of the least funded. My Uncle Dave is fighting it right now, spending 5 days a week in Radiation and Chemotherapy.</P>
+  <P>I'm not suffering like my Uncle Dave is. In fact, around the same time as his diagnosis I was fortunate enough to be making a decision to run the Southern Tour Ultra, a 100-mile ultramarathon in Wilmington, NC. At first I felt guilty that I got to make a decision to run 100 miles while my uncle prayed for his life.</P>
+  <P>I quickly realized that guilt alone wouldn't help anything. With thousands of miles to run in preparation for my upcoming ultra, I thought what better opportunity than to be a moving billboard for what's important to me.</P>
+  <P>I start my ultramarathon at 12pm on January 15th, 2027, and am hoping to finish within 24 hours. Until then I'm training six days a week. <strong>If you see me running around in that ugly yellow shirt, that was on purpose. Please say hi.</strong></P>
 </section>; }
-function Run({mobile, onPledge}){ return <section id="run" style={wrap(mobile)}>
-  <H2 m={mobile}>The run</H2>
-  <P>I'm choosing to run the Southern Tour Ultra, a 100-mile course in Wilmington, NC. I start at 12pm on January 15th, 2027, and am hoping to finish within 24 hours. I would be lying if I said I wasn't a bit afraid — I've never run more than 40.</P>
-  <P>So until then I'm training six days a week. With thousands of miles to run in preparation, I thought what better opportunity than to be a moving billboard for what's important to me. If you see me running around in that ugly yellow shirt, that's on purpose. Please say hi.</P>
-  <h3 id="pledge" style={{fontSize:mobile?22:26,lineHeight:1.2,fontWeight:600,marginTop:36,paddingTop:28,borderTop:'1px solid var(--color-border)',marginBottom:14}}>The pledge</h3>
+function Give({mobile, onPledge}){ return <section id="give" style={wrap(mobile)}>
+  <H2 m={mobile}>Ways to give</H2>
+  <h3 id="pledge" style={{fontSize:mobile?22:26,lineHeight:1.2,fontWeight:600,marginTop:8,marginBottom:14}}>The pledge</h3>
   <P>Pledge an amount per mile. Whether that's a dime or a dollar, anything helps me push to the finish. You only pay for the miles I actually finish inside my 24-hour goal. Cover all 100 and a $1 pledge turns into $100 for a real cause. The pressure to achieve my goal is exactly what I need to get out the door on the days I'd rather not train. I'll follow up with everyone who pledged once the ultramarathon is done.</P>
   <Button variant="donate" fullWidth={mobile} onClick={onPledge}>Join the pledge</Button>
 </section>; }
@@ -150,4 +149,4 @@ function PledgeModal({mobile, onClose}){
   </div>;
 }
 function StickyDonate({onDonate}){ return <div style={{position:'fixed',left:0,right:0,bottom:0,background:'#fff',borderTop:'1px solid var(--color-border)',padding:12,display:'flex',gap:8,zIndex:10}}><Button variant="donate" fullWidth onClick={()=>onDonate('card')}>Donate</Button><Button variant="secondary" fullWidth onClick={()=>onDonate('venmo')}>Venmo</Button><Button variant="outline" fullWidth onClick={()=>onDonate('pledge')}>Pledge</Button></div>; }
-Object.assign(window,{Cause,Run,Stats,Why,DonateModal,PledgeModal,StickyDonate});
+Object.assign(window,{Cause,Give,Stats,Why,DonateModal,PledgeModal,StickyDonate});
