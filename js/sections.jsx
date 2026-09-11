@@ -15,8 +15,8 @@ function Give({mobile, onDonate}){ return <section id="give" style={wrap(mobile)
   <H3 m={mobile} id="pledge">The pledge</H3>
   <P>Pledge an amount per mile. Whether that's a dime or a dollar, anything helps me push to the finish. You only pay for the miles I actually finish inside my 24-hour goal. Cover all 100 and a $1 pledge turns into $100. I'll follow up with everyone who pledged once the ultramarathon is done, and you can decide whether you'd like your money to go to bladder cancer research or disabled veterans.</P>
   <Button variant="donate" fullWidth={mobile} onClick={()=>onDonate('pledge')}>Join the pledge</Button>
-  <H3 m={mobile} id="charity" divider>Donate through [charity]</H3>
-  <P>Tax-deductible donations go through [charity], a registered 501(c)(3).</P>
+  <H3 m={mobile} id="charity" divider>Donate through the UNC Health Foundation</H3>
+  <P>Tax-deductible donations go through the UNC Health Foundation, a registered 501(c)(3), and support the Matthew I. Milowsky, MD Fund for Genitourinary Oncology.</P>
   <Button variant="donate" fullWidth={mobile} onClick={()=>onDonate('card')}>Donate (tax-deductible)</Button>
   <H3 m={mobile} id="venmo" divider>Quick and easy (Venmo)</H3>
   {/* paragraph coming */}
@@ -76,17 +76,19 @@ function DonateModal({mode, mobile, onClose}){
   const presets = mode==='venmo' ? ['5','10','25','100'] : ['25','50','100','250'];
   const [sel,setSel]=React.useState(mode==='venmo' ? '25' : '50'); const [custom,setCustom]=React.useState(''); const [done,setDone]=React.useState(false); const [err,setErr]=React.useState('');
   const amt = sel==='other' ? custom : sel;
+  const D=window.PCO_DATA||{}; const givingUrl=(D.givingUrl||'').trim(); const cardLive = mode!=='card' || !!givingUrl;
   const impact = mode==='venmo' ? {'5':"Gas money for that commute to therapy.",'10':"Gas money for that commute to therapy.",'25':"Uncle Dave doesn't need to worry about dinner tonight.",'100':"Uncle Dave doesn't have to worry about lawncare this week."}[amt] : null;
   return <div onClick={onClose} style={{position:'fixed',inset:0,background:'rgba(17,24,39,.55)',display:'flex',alignItems:'center',justifyContent:'center',padding:16,zIndex:50}}>
     <div onClick={e=>e.stopPropagation()} style={{background:'#fff',borderRadius:6,padding:32,width:'100%',maxWidth:440,maxHeight:'100%',overflowY:'auto',boxShadow:'0 2px 6px rgba(0,0,0,.08)'}}>
       <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline'}}><h3 style={{fontSize:24,fontWeight:600}}>{mode==='venmo'?'Venmo':'Donate — tax-deductible'}</h3><button onClick={onClose} aria-label="Close" style={{border:0,background:'none',font:'400 24px/1 var(--font-body)',color:'var(--pco-navy)',cursor:'pointer'}}>×</button></div>
       {done ? <p style={{marginTop:16,fontSize:18,lineHeight:1.55}}>Thank you. That's ${amt} toward the goal. I'll carry it for 100 miles.</p> : <>
-        <p style={{marginTop:8,fontSize:16,lineHeight:1.55,color:'var(--color-text-muted)'}}>{mode==='venmo'?'Send to @BlakeAnderson3. Please specify where you want your money to go - bladder cancer research, disabled veterans, or supporting my Uncle Dave and his family. I will follow up with where the money went.':'Processed by [charity], a registered 501(c)(3). You get a receipt by email.'}</p>
+        <p style={{marginTop:8,fontSize:16,lineHeight:1.55,color:'var(--color-text-muted)'}}>{mode==='venmo'?'Send to @BlakeAnderson3. Please specify where you want your money to go - bladder cancer research, disabled veterans, or supporting my Uncle Dave and his family. I will follow up with where the money went.':'Processed by the UNC Health Foundation, a registered 501(c)(3). Your gift supports the Matthew I. Milowsky, MD Fund for Genitourinary Oncology. You get a receipt by email.'}</p>
         <div style={{display:'grid',gridTemplateColumns:mobile?'repeat(3,1fr)':'repeat(5,1fr)',gap:8,marginTop:20}}>{[...presets,'other'].map(v=><Button key={v} size="sm" variant={sel===v?'secondary':'outline'} onClick={()=>{setSel(v);setErr('');}} style={{minWidth:0,paddingLeft:0,paddingRight:0,fontFamily:'var(--font-display)',fontSize:20}}>{v==='other'?'Other':'$'+v}</Button>)}</div>
         {sel==='other' && <Input label="Your amount" prefix="$" inputMode="numeric" value={custom} onChange={e=>{setCustom(e.target.value.replace(/[^0-9]/g,''));setErr('');}} style={{marginTop:16}} />}
         {impact && <p style={{marginTop:14,fontSize:16,lineHeight:1.5,fontWeight:600,color:'var(--pco-navy)'}}>{impact}</p>}
         {err && <p style={{marginTop:12,fontSize:14,lineHeight:1.5,color:'#B42318'}}>{err}</p>}
-        <Button variant="donate" fullWidth style={{marginTop:20}} onClick={()=>{ if(!(parseInt(amt,10)>0)) return setErr('Please enter an amount.'); if(mode==='venmo') openVenmo(amt); setDone(true); }}>{mode==='venmo'?'Open Venmo':'Give $'+(amt||'0')}</Button>
+        <Button variant="donate" fullWidth disabled={!cardLive} style={{marginTop:20}} onClick={()=>{ if(!cardLive) return; if(!(parseInt(amt,10)>0)) return setErr('Please enter an amount.'); if(mode==='venmo') openVenmo(amt); else window.open(givingUrl,'_blank','noopener'); setDone(true); }}>{mode==='venmo'?'Open Venmo':'Give $'+(amt||'0')}</Button>
+        {!cardLive && <p style={{marginTop:12,fontSize:16,lineHeight:1.5,fontWeight:600,color:'var(--pco-navy)'}}>{D.givingNote||'My giving link should be live soon.'}</p>}
       </>}
     </div>
   </div>;

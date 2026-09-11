@@ -11,7 +11,10 @@ window.PCO_DATA = {
     hours: "204.8",
     runs: "181"
   },
-  charityLine: "Tax-deductible donations are processed by [charity], a registered 501(c)(3), EIN [EIN].",
+  charity: { name: "UNC Health Foundation", fund: "Matthew I. Milowsky, MD Fund for Genitourinary Oncology" },
+  givingUrl: "", // paste the UNC giving link here when it's live; the Give button switches on automatically
+  givingNote: "My giving link should be live by September 25th.",
+  charityLine: "Tax-deductible donations are processed by the UNC Health Foundation, a registered 501(c)(3), and support the Matthew I. Milowsky, MD Fund for Genitourinary Oncology.",
   venmo: "@BlakeAnderson3",
   email: "blake@pisscanceroff.org",
   strava: "https://strava.app.link/BPIZvVURg6b",
