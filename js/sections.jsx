@@ -16,7 +16,7 @@ function Give({mobile, onDonate}){ return <section id="give" style={wrap(mobile)
   <P>Pledge an amount per mile. Whether that's a dime or a dollar, anything helps me push to the finish. You only pay for the miles I actually finish inside my 24-hour goal. Cover all 100 and a $1 pledge turns into $100. I'll follow up with everyone who pledged once the ultramarathon is done, and you can decide whether you'd like your money to go to bladder cancer research or disabled veterans.</P>
   <Button variant="donate" fullWidth={mobile} onClick={()=>onDonate('pledge')}>Join the pledge</Button>
   <H3 m={mobile} id="charity" divider>Donate through [charity]</H3>
-  {/* paragraph coming */}
+  <P>Tax-deductible donations go through [charity], a registered 501(c)(3).</P>
   <Button variant="donate" fullWidth={mobile} onClick={()=>onDonate('card')}>Donate (tax-deductible)</Button>
   <H3 m={mobile} id="venmo" divider>Quick and easy (Venmo)</H3>
   {/* paragraph coming */}
