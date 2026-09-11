@@ -10,7 +10,7 @@ function Cause({mobile}){ return <section id="overview" style={wrap(mobile)}>
 </section>; }
 function Run({mobile, onPledge}){ return <section id="run" style={wrap(mobile)}>
   <H2 m={mobile}>The run</H2>
-  <P>I'm choosing to run the Southern Tour Ultra, a 100 miles course in Wilmington, NC. I start at 12pm on January 15th, 2027, and am hoping to finish within 24 hours. I would be lying if I said I wasn't a bit afraid - I've never run more than 40.</P>
+  <P>I'm choosing to run the Southern Tour Ultra, a 100-mile course in Wilmington, NC. I start at 12pm on January 15th, 2027, and am hoping to finish within 24 hours. I would be lying if I said I wasn't a bit afraid — I've never run more than 40.</P>
   <P>So until then I'm training six days a week. With thousands of miles to run in preparation, I thought what better opportunity than to be a moving billboard for what's important to me. If you see me running around in that ugly yellow shirt, that's on purpose. Please say hi.</P>
   <h3 id="pledge" style={{fontSize:mobile?22:26,lineHeight:1.2,fontWeight:600,marginTop:36,paddingTop:28,borderTop:'1px solid var(--color-border)',marginBottom:14}}>The pledge</h3>
   <P>Pledge an amount per mile. Whether that's a dime or a dollar, anything helps me push to the finish. You only pay for the miles I actually finish inside my 24-hour goal. Cover all 100 and a $1 pledge turns into $100 for a real cause. The pressure to achieve my goal is exactly what I need to get out the door on the days I'd rather not train. I'll follow up with everyone who pledged once the ultramarathon is done.</P>
