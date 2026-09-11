@@ -9,8 +9,7 @@ window.PCO_DATA = {
     miles: "1,182.3",
     steps: "3,143,830",
     hours: "204.8",
-    runs: "181",
-    calories: "193,942"
+    runs: "181"
   },
   charityLine: "Tax-deductible donations are processed by [charity], a registered 501(c)(3), EIN [EIN].",
   venmo: "@BlakeAnderson3",

@@ -32,12 +32,12 @@ function Countdown({mobile, target}){
   </div>;
 }
 function Stats({mobile, stats, raceStart, strava, instagram}){
-  const items=[['miles',stats.miles,'miles run in training'],['steps',stats.steps,'steps taken'],['hours',stats.hours,'hours on my feet'],['runs',stats.runs,'training runs'],['calories',stats.calories,'calories burned']];
+  const items=[['miles',stats.miles,'miles run'],['steps',stats.steps,'steps taken'],['hours',stats.hours,'hours on my feet'],['runs',stats.runs,'training runs']];
   const follow=[strava&&['Strava',strava],instagram&&['Instagram',instagram]].filter(Boolean);
   return <section id="stats" style={{background:'var(--pco-paper-2)'}}><div style={wrap(mobile)}>
   <H2 m={mobile}>Training stats</H2>
   <P>Logged since January 1st, 2026.</P>
-  <div style={{display:'grid',gridTemplateColumns:mobile?'1fr 1fr':'repeat(3,1fr)',gap:mobile?'28px 16px':'36px 32px',marginTop:28,alignItems:'end'}}>
+  <div style={{display:'grid',gridTemplateColumns:mobile?'1fr 1fr':'repeat(4,1fr)',gap:mobile?'28px 16px':'36px 24px',marginTop:28,alignItems:'end'}}>
     {items.map(([k,v,cap])=><BigNumber key={k} size={mobile?'sm':'md'} color={k==='miles'?'navy':'ink'} value={v} caption={cap} />)}
   </div>
   {follow.length>0 && <p style={{marginTop:36,fontSize:18,lineHeight:1.55}}>Follow along — training updates live on {follow.map(([l,h],i)=><React.Fragment key={l}>{i>0?' and ':''}<a href={h} target="_blank" rel="noopener" style={{color:'var(--pco-navy)',fontWeight:600}}>{l}</a></React.Fragment>)}.</p>}
