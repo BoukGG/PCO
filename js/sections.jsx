@@ -9,11 +9,18 @@ function Cause({mobile}){ return <section id="overview" style={wrap(mobile)}>
   <P>At first I felt guilty that I got to make a decision to run 100 miles while my uncle prayed for his life. I quickly realized that guilt alone wouldn't help anything. With thousands of miles to run in preparation for my upcoming ultra, I thought what better opportunity than to be a moving billboard for what's important to me.</P>
   <P>I start my ultramarathon at 12pm on January 15th, 2027, and am hoping to finish within 24 hours. Until then I'm training six days a week. <strong>If you see me running around in that ugly yellow shirt, that was on purpose. Please say hi.</strong></P>
 </section>; }
-function Give({mobile, onPledge}){ return <section id="give" style={wrap(mobile)}>
+const H3 = ({m,id,divider,children}) => <h3 id={id} style={{fontSize:m?22:26,lineHeight:1.2,fontWeight:600,marginBottom:14,...(divider?{marginTop:36,paddingTop:28,borderTop:'1px solid var(--color-border)'}:{marginTop:8})}}>{children}</h3>;
+function Give({mobile, onDonate}){ return <section id="give" style={wrap(mobile)}>
   <H2 m={mobile}>Ways to give</H2>
-  <h3 id="pledge" style={{fontSize:mobile?22:26,lineHeight:1.2,fontWeight:600,marginTop:8,marginBottom:14}}>The pledge</h3>
-  <P>Pledge an amount per mile. Whether that's a dime or a dollar, anything helps me push to the finish. You only pay for the miles I actually finish inside my 24-hour goal. Cover all 100 and a $1 pledge turns into $100 for a real cause. The pressure to achieve my goal is exactly what I need to get out the door on the days I'd rather not train. I'll follow up with everyone who pledged once the ultramarathon is done.</P>
-  <Button variant="donate" fullWidth={mobile} onClick={onPledge}>Join the pledge</Button>
+  <H3 m={mobile} id="pledge">The pledge</H3>
+  <P>Pledge an amount per mile. Whether that's a dime or a dollar, anything helps me push to the finish. You only pay for the miles I actually finish inside my 24-hour goal. Cover all 100 and a $1 pledge turns into $100. I'll follow up with everyone who pledged once the ultramarathon is done, and you can decide whether you'd like your money to go to bladder cancer research or disabled veterans.</P>
+  <Button variant="donate" fullWidth={mobile} onClick={()=>onDonate('pledge')}>Join the pledge</Button>
+  <H3 m={mobile} id="charity" divider>Donate through [charity]</H3>
+  {/* paragraph coming */}
+  <Button variant="donate" fullWidth={mobile} onClick={()=>onDonate('card')}>Donate (tax-deductible)</Button>
+  <H3 m={mobile} id="venmo" divider>Quick and easy (Venmo)</H3>
+  {/* paragraph coming */}
+  <Button variant="secondary" fullWidth={mobile} onClick={()=>onDonate('venmo')}>Venmo @BlakeAnderson3</Button>
 </section>; }
 function Countdown({mobile, target}){
   const t=new Date(target).getTime();
