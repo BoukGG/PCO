@@ -89,6 +89,7 @@ function DonateModal({mode, mobile, onClose}){
         {err && <p style={{marginTop:12,fontSize:14,lineHeight:1.5,color:'#B42318'}}>{err}</p>}
         <Button variant="donate" fullWidth disabled={!cardLive} style={{marginTop:20}} onClick={()=>{ if(!cardLive) return; if(!(parseInt(amt,10)>0)) return setErr('Please enter an amount.'); if(mode==='venmo') openVenmo(amt); else window.open(givingUrl,'_blank','noopener'); setDone(true); }}>{mode==='venmo'?'Open Venmo':'Give $'+(amt||'0')}</Button>
         {!cardLive && <p style={{marginTop:12,fontSize:16,lineHeight:1.5,fontWeight:600,color:'var(--pco-navy)'}}>{D.givingNote||'My giving link should be live soon.'}</p>}
+        {!cardLive && <NotifyForm />}
       </>}
     </div>
   </div>;
@@ -99,21 +100,15 @@ function pledgeConfig(){
   const p=(window.PCO_DATA||{}).pledge||{}; const e=p.entries||{}; const isEntry=v=>/^entry\.\d+$/.test(v||'');
   return { ok: !!p.formId && !/[\[\]]/.test(p.formId) && isEntry(e.name) && isEntry(e.email) && isEntry(e.amount), formId:p.formId, entries:e, phoneEnabled:isEntry(e.phone), amountChoices:Array.isArray(p.amountChoices)?p.amountChoices:[] };
 }
-function submitPledge({name,email,phone,amount}){
-  const c=pledgeConfig(); if(!c.ok) return Promise.reject(new Error('pledge form not configured'));
-  // Add ?pledgedebug=1 to the site URL to submit into a visible tab and see Google's actual response page.
+// Posts to a Google Form via a real form submission into a hidden frame (exactly what Google's own page sends; the response is
+// cross-origin so it can't be read). Add ?pledgedebug=1 to the site URL to submit into a visible tab and see Google's response page.
+function postGoogleForm(formId, fields){
   const debug=/pledgedebug/.test(location.search+location.hash);
-  const fields={[c.entries.name]:name,[c.entries.email]:email,fvv:'1',pageHistory:'0',fbzx:'-'+Math.floor(Math.random()*1e18)};
-  if(c.phoneEnabled&&phone) fields[c.entries.phone]=phone;
-  // Multiple-choice questions only accept an option's exact text; anything else has to go through the "Other" option.
-  const amt='$'+Number(amount).toFixed(2);
-  if(c.amountChoices.length && !c.amountChoices.includes(amt)){ fields[c.entries.amount]='__other_option__'; fields[c.entries.amount+'.other_option_response']=amt; }
-  else fields[c.entries.amount]=amt;
+  const all={...fields,fvv:'1',pageHistory:'0',fbzx:'-'+Math.floor(Math.random()*1e18)};
   return new Promise(resolve=>{
-    const target=debug?'_blank':'pco-pledge-sink-'+Date.now();
-    // A real form submission is exactly what Google's own page sends; the response lands in a hidden frame (cross-origin, so it can't be read).
-    const form=document.createElement('form'); form.method='POST'; form.action='https://docs.google.com/forms/d/e/'+c.formId+'/formResponse'; form.target=target; form.acceptCharset='UTF-8'; form.style.display='none';
-    Object.entries(fields).forEach(([k,v])=>{ const i=document.createElement('input'); i.type='hidden'; i.name=k; i.value=v; form.appendChild(i); });
+    const target=debug?'_blank':'pco-form-sink-'+Date.now();
+    const form=document.createElement('form'); form.method='POST'; form.action='https://docs.google.com/forms/d/e/'+formId+'/formResponse'; form.target=target; form.acceptCharset='UTF-8'; form.style.display='none';
+    Object.entries(all).forEach(([k,v])=>{ const i=document.createElement('input'); i.type='hidden'; i.name=k; i.value=v; form.appendChild(i); });
     let frame=null, finished=false;
     const done=()=>{ if(finished) return; finished=true; form.remove(); if(frame) setTimeout(()=>frame.remove(),1500); resolve(); };
     if(!debug){ frame=document.createElement('iframe'); frame.name=target; frame.style.display='none'; document.body.appendChild(frame); }
@@ -122,6 +117,41 @@ function submitPledge({name,email,phone,amount}){
     if(frame) frame.addEventListener('load',done);
     setTimeout(done, debug?0:4000);
   });
+}
+function submitPledge({name,email,phone,amount}){
+  const c=pledgeConfig(); if(!c.ok) return Promise.reject(new Error('pledge form not configured'));
+  const fields={[c.entries.name]:name,[c.entries.email]:email};
+  if(c.phoneEnabled&&phone) fields[c.entries.phone]=phone;
+  // Multiple-choice questions only accept an option's exact text; anything else has to go through the "Other" option.
+  const amt='$'+Number(amount).toFixed(2);
+  if(c.amountChoices.length && !c.amountChoices.includes(amt)){ fields[c.entries.amount]='__other_option__'; fields[c.entries.amount+'.other_option_response']=amt; }
+  else fields[c.entries.amount]=amt;
+  return postGoogleForm(c.formId, fields);
+}
+function notifyConfig(){ const n=(window.PCO_DATA||{}).notify||{}; const e=n.entries||{}; const isEntry=v=>/^entry\.\d+$/.test(v||''); return { ok: !!n.formId && !/[\[\]]/.test(n.formId) && isEntry(e.name) && isEntry(e.email), formId:n.formId, entries:e, phoneEnabled:isEntry(e.phone) }; }
+function NotifyForm(){
+  const cfg=notifyConfig(); const contact=(window.PCO_DATA||{}).email||'';
+  const [name,setName]=React.useState(''); const [email,setEmail]=React.useState(''); const [phone,setPhone]=React.useState('');
+  const [status,setStatus]=React.useState('idle'); const [err,setErr]=React.useState('');
+  const submit=async()=>{
+    if(status==='sending') return; setErr('');
+    if(!name.trim()) return setErr('Please add your name.');
+    if(!email.trim() && !(cfg.phoneEnabled && phone.trim())) return setErr('Please add an email or phone number so I can reach you.');
+    if(email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) return setErr("That email doesn't look right.");
+    if(!cfg.ok) return setErr("The notify list isn't connected yet — email "+contact+" and I'll let you know by hand.");
+    setStatus('sending');
+    try{ const f={[cfg.entries.name]:name.trim(),[cfg.entries.email]:email.trim()}; if(cfg.phoneEnabled&&phone.trim()) f[cfg.entries.phone]=phone.trim(); await postGoogleForm(cfg.formId,f); setStatus('done'); }
+    catch(e){ setStatus('idle'); setErr("Something went wrong — email "+contact+" and I'll let you know by hand."); }
+  };
+  if(status==='done') return <p style={{marginTop:14,fontSize:16,lineHeight:1.55}}>You're on the list. I'll reach out the moment the giving link is live. Thank you.</p>;
+  return <div style={{marginTop:16,paddingTop:16,borderTop:'1px solid var(--color-border)'}}>
+    <p style={{fontSize:16,lineHeight:1.5,color:'var(--color-text-muted)'}}>Enter contact information to be notified once the giving link is live!</p>
+    <Input label="Name" value={name} onChange={e=>setName(e.target.value)} style={{marginTop:12}} />
+    <Input label="Email" type="email" value={email} onChange={e=>setEmail(e.target.value)} style={{marginTop:12}} />
+    {cfg.phoneEnabled && <Input label="Phone" type="tel" value={phone} onChange={e=>setPhone(e.target.value)} style={{marginTop:12}} />}
+    {err && <p style={{marginTop:12,fontSize:14,lineHeight:1.5,color:'#B42318'}}>{err}</p>}
+    <Button variant="secondary" fullWidth style={{marginTop:16}} onClick={submit}>{status==='sending'?'Sending…':'Notify me'}</Button>
+  </div>;
 }
 function PledgeModal({mobile, onClose}){
   const cfg=pledgeConfig(); const contact=(window.PCO_DATA||{}).email||'';

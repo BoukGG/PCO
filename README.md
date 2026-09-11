@@ -38,6 +38,7 @@ site/
 - In the form's Settings → Responses, keep "Collect email addresses" and "Limit to 1 response" **off** — either one forces a Google sign-in and blocks submissions from the site.
 - The pledge-per-mile question is **multiple choice**, so the site sends the amount formatted like its options (`$1.00`). `amountChoices` in `data.js` must list those options exactly; an amount not in the list (e.g. the site's $5) is sent through the question's **Other** option, so keep "Other" enabled. If you ever switch that question to Short answer, set `amountChoices: []`.
 - No question in the form should be marked **Required** — the site validates, and Google silently drops a submission that fails a required check.
+- **Notify-me list:** while `givingUrl` is empty, the tax-deductible modal shows a Name/Email/Phone form that posts to a second Google Form configured in the `notify` block of `data.js` (same form-ID / entry-ID setup as the pledge).
 - **Debugging:** open the site with `?pledgedebug=1` on the URL (e.g. `https://pisscanceroff.org/?pledgedebug=1`) and submit a pledge. Instead of a hidden submission, Google's response page opens in a new tab: "Your response has been recorded" means it worked; a sign-in prompt or "This is a required question" tells you which form setting is blocking it.
 
 ## Notes

@@ -14,6 +14,11 @@ window.PCO_DATA = {
   charity: { name: "UNC Health Foundation", fund: "Matthew I. Milowsky, MD Fund for Genitourinary Oncology" },
   givingUrl: "", // paste the UNC giving link here when it's live; the Give button switches on automatically
   givingNote: "My giving link should be live by September 25th.",
+  // "Notify me when the giving link is live" form (shown in the tax-deductible modal while givingUrl is empty). Same Google Form setup as the pledge.
+  notify: {
+    formId: "1FAIpQLSdkyM8LnlPtzxxU2DsKK8jvJUt06palrY2EPc1MdGkU9J6pSw",
+    entries: { name: "entry.15103998", email: "entry.1680144250", phone: "entry.955689074" }
+  },
   charityLine: "Tax-deductible donations are processed by the UNC Health Foundation, a registered 501(c)(3), and support the Matthew I. Milowsky, MD Fund for Genitourinary Oncology.",
   venmo: "@BlakeAnderson3",
   email: "blake@pisscanceroff.org",
