@@ -5,8 +5,8 @@ const P = ({children}) => <p style={{fontSize:18,lineHeight:1.55,maxWidth:'65ch'
 function Cause({mobile}){ return <section id="overview" style={wrap(mobile)}>
   <H2 m={mobile}>The overview</H2>
   <P>Bladder cancer is the sixth most common cancer in the US yet also one of the least funded. My Uncle Dave is fighting it right now, spending 5 days a week in Radiation and Chemotherapy.</P>
-  <P>I'm not suffering like my Uncle Dave is. In fact, around the same time as his diagnosis I was fortunate enough to be making a decision to run the Southern Tour Ultra, a 100-mile ultramarathon in Wilmington, NC. At first I felt guilty that I got to make a decision to run 100 miles while my uncle prayed for his life.</P>
-  <P>I quickly realized that guilt alone wouldn't help anything. With thousands of miles to run in preparation for my upcoming ultra, I thought what better opportunity than to be a moving billboard for what's important to me.</P>
+  <P>I'm not suffering like my Uncle Dave is. In fact, around the same time as his diagnosis I was fortunate enough to be making a decision to run the Southern Tour Ultra, a 100-mile ultramarathon in Wilmington, NC.</P>
+  <P>At first I felt guilty that I got to make a decision to run 100 miles while my uncle prayed for his life. I quickly realized that guilt alone wouldn't help anything. With thousands of miles to run in preparation for my upcoming ultra, I thought what better opportunity than to be a moving billboard for what's important to me.</P>
   <P>I start my ultramarathon at 12pm on January 15th, 2027, and am hoping to finish within 24 hours. Until then I'm training six days a week. <strong>If you see me running around in that ugly yellow shirt, that was on purpose. Please say hi.</strong></P>
 </section>; }
 function Give({mobile, onPledge}){ return <section id="give" style={wrap(mobile)}>
