@@ -10,7 +10,7 @@ Static, no build step. Everything in this folder is what gets served.
 5. Custom domain: add a `CNAME` file containing `pisscanceroff.org`, then point the domain's DNS at GitHub Pages (A records 185.199.108.153 / .109 / .110 / .111 and a `www` CNAME to `<user>.github.io`). Tick "Enforce HTTPS" once the certificate is issued.
 
 ## Edit content
-- `js/data.js` — raised amount, goal, race start instant (for the countdown), training stats (miles/steps/hours/runs), charity name/fund and footer line, `givingUrl` (leave empty until the UNC giving link exists; the tax-deductible Give button stays disabled with `givingNote` shown until then), Venmo, email, Strava/Instagram links, pledge-form IDs. This is the only file you need to touch for routine updates.
+- `js/data.js` — raised amount, goal, race start instant (for the countdown), training stats (miles/steps/hours/runs), charity name/fund and footer line, `givingUrl` (the UNC giving page every tax-deductible button links to), Venmo, email, Strava/Instagram links, pledge-form IDs. This is the only file you need to touch for routine updates.
 - `assets/photos/` — drop `hero.jpg` and `shirt.jpg` (see README there).
 - Copy text lives in `js/sections.jsx` (The overview, The why, Ways to give) and `js/hero.jsx` (headline).
 
@@ -23,7 +23,7 @@ site/
   css/styles.css        fonts, color/type/spacing tokens, base styles
   js/pco-components.js  Button, ProgressBar, BigNumber, UpdateItem, Badge, Input, Nav, Footer
   js/hero.jsx           hero section
-  js/sections.jsx       overview, why, ways to give, training stats, donate/pledge modals, mobile sticky bar
+  js/sections.jsx       overview, why, ways to give, training stats, Venmo/pledge modals, mobile sticky bar
   js/data.js            editable numbers and updates
   assets/fonts/         Oswald (OFL). Inter loads from Google Fonts.
   assets/logo/          all logo variants + favicon
@@ -38,9 +38,8 @@ site/
 - In the form's Settings → Responses, keep "Collect email addresses" and "Limit to 1 response" **off** — either one forces a Google sign-in and blocks submissions from the site.
 - The pledge-per-mile question is **multiple choice**, so the site sends the amount formatted like its options (`$1.00`). `amountChoices` in `data.js` must list those options exactly; an amount not in the list (e.g. the site's $5) is sent through the question's **Other** option, so keep "Other" enabled. If you ever switch that question to Short answer, set `amountChoices: []`.
 - No question in the form should be marked **Required** — the site validates, and Google silently drops a submission that fails a required check.
-- **Notify-me list:** while `givingUrl` is empty, the tax-deductible modal shows a Name/Email/Phone form that posts to a second Google Form configured in the `notify` block of `data.js` (same form-ID / entry-ID setup as the pledge).
 - **Debugging:** open the site with `?pledgedebug=1` on the URL (e.g. `https://pisscanceroff.org/?pledgedebug=1`) and submit a pledge. Instead of a hidden submission, Google's response page opens in a new tab: "Your response has been recorded" means it worked; a sign-in prompt or "This is a required question" tells you which form setting is blocking it.
 
 ## Notes
 - React, ReactDOM and Babel load from unpkg (CDN). JSX is compiled in the browser; fine for a one-page site.
-- Donate buttons open a mock amount picker. Wire the "Give" button to your charity's donation URL and the Venmo button to `https://venmo.com/<handle>` in `js/sections.jsx` (`DonateModal`).
+- Tax-deductible donate buttons link straight to `givingUrl` (data.js). The Venmo button opens an amount picker that deep-links into the Venmo app (`VenmoModal` in `js/sections.jsx`).

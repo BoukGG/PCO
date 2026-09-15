@@ -10,14 +10,14 @@ function Cause({mobile}){ return <section id="overview" style={wrap(mobile)}>
   <P>I start my ultramarathon at 12pm on January 15th, 2027, and am hoping to finish within 24 hours. Until then I'm training six days a week. <strong>If you see me running around in that ugly yellow shirt, that was on purpose. Please say hi.</strong></P>
 </section>; }
 const H3 = ({m,id,divider,children}) => <h3 id={id} style={{fontSize:m?22:26,lineHeight:1.2,fontWeight:600,marginBottom:14,...(divider?{marginTop:36,paddingTop:28,borderTop:'1px solid var(--color-border)'}:{marginTop:8})}}>{children}</h3>;
-function Give({mobile, onDonate}){ return <section id="give" style={wrap(mobile)}>
+function Give({mobile, givingUrl, onDonate}){ return <section id="give" style={wrap(mobile)}>
   <H2 m={mobile}>Ways to give</H2>
   <H3 m={mobile} id="pledge">The pledge</H3>
   <P>Pledge an amount per mile. Whether that's a dime or a dollar, anything helps me push to the finish. You only pay for the miles I actually finish inside my 24-hour goal. Cover all 100 and a $1 pledge turns into $100. I'll follow up with everyone who pledged once the ultramarathon is done, and you can decide whether you'd like your money to go to bladder cancer research or disabled veterans.</P>
   <Button variant="donate" fullWidth={mobile} onClick={()=>onDonate('pledge')}>Join the pledge</Button>
   <H3 m={mobile} id="charity" divider>Donate through the UNC Health Foundation</H3>
   <P>Tax-deductible donations go through the UNC Health Foundation, a registered 501(c)(3), and support the Matthew I. Milowsky, MD Fund for Genitourinary Oncology.</P>
-  <Button variant="donate" fullWidth={mobile} onClick={()=>onDonate('card')}>Donate (tax-deductible)</Button>
+  <Button variant="donate" fullWidth={mobile} href={givingUrl} target="_blank" rel="noopener">Donate (tax-deductible)</Button>
   <H3 m={mobile} id="venmo" divider>Quick and easy (Venmo)</H3>
   <P>I am accepting Venmo donations as a quick way to simply bypass the need to enter your payment information. In your Venmo donation description please specify where you'd like your money to go, whether that is the UNC Health Foundation, disabled veterans, or simply helping support my Uncle Dave and his family. Zelle transactions will work as well to my phone number (972) 352-9711.</P>
   <Button variant="secondary" fullWidth={mobile} onClick={()=>onDonate('venmo')}>Venmo @BlakeAnderson3</Button>
@@ -48,7 +48,7 @@ function Stats({mobile, stats, raceStart, strava, instagram}){
   {follow.length>0 && <p style={{marginTop:36,fontSize:18,lineHeight:1.55}}>Follow along — training updates live on {follow.map(([l,h],i)=><React.Fragment key={l}>{i>0?' and ':''}<a href={h} target="_blank" rel="noopener" style={{color:'var(--pco-navy)',fontWeight:600}}>{l}</a></React.Fragment>)}.</p>}
   {raceStart && <Countdown mobile={mobile} target={raceStart} />}
 </div></section>; }
-function Why({mobile, onDonate}){ return <section id="why" style={{background:'var(--pco-paper-2)'}}><div style={wrap(mobile)}>
+function Why({mobile, givingUrl, onDonate}){ return <section id="why" style={{background:'var(--pco-paper-2)'}}><div style={wrap(mobile)}>
   <H2 m={mobile}>The why</H2>
   <P>My Uncle Dave is one of the greatest men I know. He's the guy who shows up constantly for his family, for his friends, and anyone who needs a hand. Spending the last 40 years with the United States Coast Guard, there's one word to describe him, and that's selfless.</P>
   <P>Right now he's in the fight of his life against bladder cancer, spending five days a week commuting multiple hours to radiation and chemotherapy. I had the privilege to stand by his side during his first treatment, and what I saw was a man who faces a grueling challenge daily, yet with nothing but a smile on his face.</P>
@@ -56,7 +56,7 @@ function Why({mobile, onDonate}){ return <section id="why" style={{background:'v
   <div style={{marginTop:28}}><Photo src="assets/photos/mom-and-dave.jpeg" label="Real photo: my beautiful mom and my Uncle Dave" style={{aspectRatio:'4/5',maxWidth:mobile?'100%':440}} />
   <p style={{fontSize:14,lineHeight:1.5,color:'var(--color-text-muted)',marginTop:8}}>My beautiful mom and my Uncle Dave at his first chemotherapy treatment this past August.</p></div>
   <div style={{display:'flex',flexDirection:mobile?'column':'row',flexWrap:'wrap',gap:12,marginTop:28}}>
-    <Button variant="donate" fullWidth={mobile} onClick={()=>onDonate('card')}>Donate for Uncle Dave</Button>
+    <Button variant="donate" fullWidth={mobile} href={givingUrl} target="_blank" rel="noopener">Donate for Uncle Dave</Button>
     <Button variant="secondary" fullWidth={mobile} onClick={()=>onDonate('venmo')}>Venmo for Uncle Dave</Button>
     <Button variant="outline" fullWidth={mobile} onClick={()=>onDonate('pledge')}>Join the pledge</Button>
   </div>
@@ -72,24 +72,21 @@ function openVenmo(amt){
   window.addEventListener('pagehide',()=>clearTimeout(fallback),{once:true});
   window.location.href='venmo://paycharge?'+q+'&recipients='+VENMO_USER;
 }
-function DonateModal({mode, mobile, onClose}){
-  const presets = mode==='venmo' ? ['5','10','25','100'] : ['25','50','100','250'];
-  const [sel,setSel]=React.useState(mode==='venmo' ? '25' : '50'); const [custom,setCustom]=React.useState(''); const [done,setDone]=React.useState(false); const [err,setErr]=React.useState('');
+function VenmoModal({mobile, onClose}){
+  const presets=['5','10','25','100'];
+  const [sel,setSel]=React.useState('25'); const [custom,setCustom]=React.useState(''); const [done,setDone]=React.useState(false); const [err,setErr]=React.useState('');
   const amt = sel==='other' ? custom : sel;
-  const D=window.PCO_DATA||{}; const givingUrl=(D.givingUrl||'').trim(); const cardLive = mode!=='card' || !!givingUrl;
-  const impact = mode==='venmo' ? {'5':"Gas money for that commute to therapy.",'10':"Gas money for that commute to therapy.",'25':"Uncle Dave doesn't need to worry about dinner tonight.",'100':"Uncle Dave doesn't have to worry about lawncare this week."}[amt] : null;
+  const impact = {'5':"Gas money for that commute to therapy.",'10':"Gas money for that commute to therapy.",'25':"Uncle Dave doesn't need to worry about dinner tonight.",'100':"Uncle Dave doesn't have to worry about lawncare this week."}[amt];
   return <div onClick={onClose} style={{position:'fixed',inset:0,background:'rgba(17,24,39,.55)',display:'flex',alignItems:'center',justifyContent:'center',padding:16,zIndex:50}}>
     <div onClick={e=>e.stopPropagation()} style={{background:'#fff',borderRadius:6,padding:32,width:'100%',maxWidth:440,maxHeight:'100%',overflowY:'auto',boxShadow:'0 2px 6px rgba(0,0,0,.08)'}}>
-      <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline'}}><h3 style={{fontSize:24,fontWeight:600}}>{mode==='venmo'?'Venmo':'Donate — tax-deductible'}</h3><button onClick={onClose} aria-label="Close" style={{border:0,background:'none',font:'400 24px/1 var(--font-body)',color:'var(--pco-navy)',cursor:'pointer'}}>×</button></div>
+      <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline'}}><h3 style={{fontSize:24,fontWeight:600}}>Venmo</h3><button onClick={onClose} aria-label="Close" style={{border:0,background:'none',font:'400 24px/1 var(--font-body)',color:'var(--pco-navy)',cursor:'pointer'}}>×</button></div>
       {done ? <p style={{marginTop:16,fontSize:18,lineHeight:1.55}}>Thank you. That's ${amt} toward the goal. I'll carry it for 100 miles.</p> : <>
-        <p style={{marginTop:8,fontSize:16,lineHeight:1.55,color:'var(--color-text-muted)'}}>{mode==='venmo'?'Send to @BlakeAnderson3. Please specify where you want your money to go - bladder cancer research, disabled veterans, or supporting my Uncle Dave and his family. I will follow up with where the money went.':'Processed by the UNC Health Foundation, a registered 501(c)(3). Your gift supports the Matthew I. Milowsky, MD Fund for Genitourinary Oncology. You get a receipt by email.'}</p>
+        <p style={{marginTop:8,fontSize:16,lineHeight:1.55,color:'var(--color-text-muted)'}}>Send to @BlakeAnderson3. Please specify where you want your money to go - bladder cancer research, disabled veterans, or supporting my Uncle Dave and his family. I will follow up with where the money went.</p>
         <div style={{display:'grid',gridTemplateColumns:mobile?'repeat(3,1fr)':'repeat(5,1fr)',gap:8,marginTop:20}}>{[...presets,'other'].map(v=><Button key={v} size="sm" variant={sel===v?'secondary':'outline'} onClick={()=>{setSel(v);setErr('');}} style={{minWidth:0,paddingLeft:0,paddingRight:0,fontFamily:'var(--font-display)',fontSize:20}}>{v==='other'?'Other':'$'+v}</Button>)}</div>
         {sel==='other' && <Input label="Your amount" prefix="$" inputMode="numeric" value={custom} onChange={e=>{setCustom(e.target.value.replace(/[^0-9]/g,''));setErr('');}} style={{marginTop:16}} />}
         {impact && <p style={{marginTop:14,fontSize:16,lineHeight:1.5,fontWeight:600,color:'var(--pco-navy)'}}>{impact}</p>}
         {err && <p style={{marginTop:12,fontSize:14,lineHeight:1.5,color:'#B42318'}}>{err}</p>}
-        <Button variant="donate" fullWidth disabled={!cardLive} style={{marginTop:20}} onClick={()=>{ if(!cardLive) return; if(!(parseInt(amt,10)>0)) return setErr('Please enter an amount.'); if(mode==='venmo') openVenmo(amt); else window.open(givingUrl,'_blank','noopener'); setDone(true); }}>{mode==='venmo'?'Open Venmo':'Give $'+(amt||'0')}</Button>
-        {!cardLive && <p style={{marginTop:12,fontSize:16,lineHeight:1.5,fontWeight:600,color:'var(--pco-navy)'}}>{D.givingNote||'My giving link should be live soon.'}</p>}
-        {!cardLive && <NotifyForm />}
+        <Button variant="donate" fullWidth style={{marginTop:20}} onClick={()=>{ if(!(parseInt(amt,10)>0)) return setErr('Please enter an amount.'); openVenmo(amt); setDone(true); }}>Open Venmo</Button>
       </>}
     </div>
   </div>;
@@ -128,31 +125,6 @@ function submitPledge({name,email,phone,amount}){
   else fields[c.entries.amount]=amt;
   return postGoogleForm(c.formId, fields);
 }
-function notifyConfig(){ const n=(window.PCO_DATA||{}).notify||{}; const e=n.entries||{}; const isEntry=v=>/^entry\.\d+$/.test(v||''); return { ok: !!n.formId && !/[\[\]]/.test(n.formId) && isEntry(e.name) && isEntry(e.email), formId:n.formId, entries:e, phoneEnabled:isEntry(e.phone) }; }
-function NotifyForm(){
-  const cfg=notifyConfig(); const contact=(window.PCO_DATA||{}).email||'';
-  const [name,setName]=React.useState(''); const [email,setEmail]=React.useState(''); const [phone,setPhone]=React.useState('');
-  const [status,setStatus]=React.useState('idle'); const [err,setErr]=React.useState('');
-  const submit=async()=>{
-    if(status==='sending') return; setErr('');
-    if(!name.trim()) return setErr('Please add your name.');
-    if(!email.trim() && !(cfg.phoneEnabled && phone.trim())) return setErr('Please add an email or phone number so I can reach you.');
-    if(email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) return setErr("That email doesn't look right.");
-    if(!cfg.ok) return setErr("The notify list isn't connected yet — email "+contact+" and I'll let you know by hand.");
-    setStatus('sending');
-    try{ const f={[cfg.entries.name]:name.trim(),[cfg.entries.email]:email.trim()}; if(cfg.phoneEnabled&&phone.trim()) f[cfg.entries.phone]=phone.trim(); await postGoogleForm(cfg.formId,f); setStatus('done'); }
-    catch(e){ setStatus('idle'); setErr("Something went wrong — email "+contact+" and I'll let you know by hand."); }
-  };
-  if(status==='done') return <p style={{marginTop:14,fontSize:16,lineHeight:1.55}}>You're on the list. I'll reach out the moment the giving link is live. Thank you.</p>;
-  return <div style={{marginTop:16,paddingTop:16,borderTop:'1px solid var(--color-border)'}}>
-    <p style={{fontSize:16,lineHeight:1.5,color:'var(--color-text-muted)'}}>Enter contact information to be notified once the giving link is live!</p>
-    <Input label="Name" value={name} onChange={e=>setName(e.target.value)} style={{marginTop:12}} />
-    <Input label="Email" type="email" value={email} onChange={e=>setEmail(e.target.value)} style={{marginTop:12}} />
-    {cfg.phoneEnabled && <Input label="Phone" type="tel" value={phone} onChange={e=>setPhone(e.target.value)} style={{marginTop:12}} />}
-    {err && <p style={{marginTop:12,fontSize:14,lineHeight:1.5,color:'#B42318'}}>{err}</p>}
-    <Button variant="secondary" fullWidth style={{marginTop:16}} onClick={submit}>{status==='sending'?'Sending…':'Notify me'}</Button>
-  </div>;
-}
 function PledgeModal({mobile, onClose}){
   const cfg=pledgeConfig(); const contact=(window.PCO_DATA||{}).email||'';
   const [amt,setAmt]=React.useState('1'); const [custom,setCustom]=React.useState(''); const [name,setName]=React.useState(''); const [email,setEmail]=React.useState(''); const [phone,setPhone]=React.useState('');
@@ -188,4 +160,4 @@ function PledgeModal({mobile, onClose}){
   </div>;
 }
 function StickyDonate(){ return <div style={{position:'fixed',left:0,right:0,bottom:0,background:'#fff',borderTop:'1px solid var(--color-border)',padding:12,zIndex:10}}><Button variant="donate" fullWidth href="#give">Ways to give</Button></div>; }
-Object.assign(window,{Cause,Give,Stats,Why,DonateModal,PledgeModal,StickyDonate});
+Object.assign(window,{Cause,Give,Stats,Why,VenmoModal,PledgeModal,StickyDonate});
