@@ -12,7 +12,7 @@ window.PCO_DATA = {
     runs: "202"
   },
   charity: { name: "UNC Health Foundation", fund: "Matthew I. Milowsky, MD Fund for Genitourinary Oncology" },
-  givingUrl: "https://give.unc.edu/give/mfno?f=376728&s=LCCCOT27Y7BU39", // where every tax-deductible button links (opens in a new tab)
+  givingUrl: "https://www.givecampus.com/schools/UNCChapelHill/blake-s-run-for-cancer/?a=14158959", // where every tax-deductible button links (opens in a new tab)
   charityLine: "Tax-deductible donations are processed by the UNC Health Foundation, a registered 501(c)(3), and support the Matthew I. Milowsky, MD Fund for Genitourinary Oncology.",
   venmo: "@BlakeAnderson3",
   email: "blake@pisscanceroff.org",
