@@ -219,7 +219,7 @@ function Footer({
       display: 'block',
       marginBottom: 20
     }
-  }), (strava || instagram) && /*#__PURE__*/React.createElement("p", {
+  }), strava && /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 16,
       lineHeight: 1.5,
@@ -233,14 +233,7 @@ function Footer({
     style: {
       color: '#fff'
     }
-  }, "Strava"), strava && instagram && ' and ', instagram && /*#__PURE__*/React.createElement("a", {
-    href: instagram,
-    target: "_blank",
-    rel: "noopener",
-    style: {
-      color: '#fff'
-    }
-  }, "Instagram"), "."), /*#__PURE__*/React.createElement("p", {
+  }, "Strava"), "."), /*#__PURE__*/React.createElement("p", {
     style: {
       ...muted,
       maxWidth: '60ch',
@@ -261,7 +254,49 @@ function Footer({
       ...muted,
       margin: '10px 0 0'
     }
-  }, "Colors from the bladder cancer awareness ribbon."))));
+  }, "Colors from the bladder cancer awareness ribbon."), instagram && /*#__PURE__*/React.createElement("a", {
+    href: instagram,
+    target: "_blank",
+    rel: "noopener",
+    "aria-label": "Piss Cancer Off on Instagram",
+    title: "Instagram",
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: 44,
+      height: 44,
+      marginTop: 16,
+      marginLeft: -8,
+      color: '#fff'
+    }
+  }, /*#__PURE__*/React.createElement("svg", {
+    width: 28,
+    height: 28,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 2,
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    "aria-hidden": "true"
+  }, /*#__PURE__*/React.createElement("rect", {
+    x: 2.5,
+    y: 2.5,
+    width: 19,
+    height: 19,
+    rx: 5.5
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: 12,
+    cy: 12,
+    r: 4.3
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: 17.4,
+    cy: 6.6,
+    r: 1.1,
+    fill: "currentColor",
+    stroke: "none"
+  }))))));
 }
 Object.assign(__ds_scope, { Footer });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "components/core/Footer.jsx", error: String((e && e.message) || e) }); }

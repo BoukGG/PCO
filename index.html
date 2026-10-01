@@ -27,8 +27,8 @@ function Site(){
     <Cause mobile={mobile} />
     <Why mobile={mobile} givingUrl={D.givingUrl} onDonate={setModal} />
     <Give mobile={mobile} givingUrl={D.givingUrl} onDonate={setModal} />
-    <Stats mobile={mobile} stats={D.stats} raceStart={D.raceStart} strava={D.strava} instagram={D.instagram} />
-    <Footer compact={mobile} logo="assets/logo/horizontal-dark.svg" charityLine={D.charityLine} venmo={D.venmo} email={D.email} style={mobile?{paddingBottom:88}:undefined} />
+    <Stats mobile={mobile} stats={D.stats} raceStart={D.raceStart} strava={D.strava} />
+    <Footer compact={mobile} logo="assets/logo/horizontal-dark.svg" charityLine={D.charityLine} venmo={D.venmo} email={D.email} instagram={D.instagram} style={mobile?{paddingBottom:88}:undefined} />
     {mobile && <StickyDonate />}
     {modal==='pledge' && <PledgeModal mobile={mobile} onClose={()=>setModal(null)} />}
     {modal==='venmo' && <VenmoModal mobile={mobile} onClose={()=>setModal(null)} />}

@@ -17,7 +17,7 @@ window.PCO_DATA = {
   venmo: "@BlakeAnderson3",
   email: "blake@pisscanceroff.org",
   strava: "https://strava.app.link/BPIZvVURg6b",
-  instagram: "", // paste your Instagram profile URL here to show the link
+  instagram: "https://www.instagram.com/pisscanceroff/", // Instagram profile, shown as an icon link at the bottom of the footer
   // "Join the pledge" form. Submissions post straight into this Google Form; see README "Pledge form".
   pledge: {
     formId: "1FAIpQLSePvWWVD1dCnO41kU8g0cbID_n8WryPD-DOIDoMq1W3Zax0oQ",
