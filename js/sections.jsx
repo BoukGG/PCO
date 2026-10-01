@@ -77,7 +77,6 @@ function VenmoModal({mobile, onClose}){
   const presets=['5','10','25','100'];
   const [sel,setSel]=React.useState('25'); const [custom,setCustom]=React.useState(''); const [done,setDone]=React.useState(false); const [err,setErr]=React.useState('');
   const amt = sel==='other' ? custom : sel;
-  const impact = {'5':"Gas money for that commute to therapy.",'10':"Gas money for that commute to therapy.",'25':"Uncle Dave doesn't need to worry about dinner tonight.",'100':"Uncle Dave doesn't have to worry about lawncare this week."}[amt];
   return <div onClick={onClose} style={{position:'fixed',inset:0,background:'rgba(17,24,39,.55)',display:'flex',alignItems:'center',justifyContent:'center',padding:16,zIndex:50}}>
     <div onClick={e=>e.stopPropagation()} style={{background:'#fff',borderRadius:6,padding:32,width:'100%',maxWidth:440,maxHeight:'100%',overflowY:'auto',boxShadow:'0 2px 6px rgba(0,0,0,.08)'}}>
       <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline'}}><h3 style={{fontSize:24,fontWeight:600}}>Venmo</h3><button onClick={onClose} aria-label="Close" style={{border:0,background:'none',font:'400 24px/1 var(--font-body)',color:'var(--pco-navy)',cursor:'pointer'}}>×</button></div>
@@ -85,7 +84,7 @@ function VenmoModal({mobile, onClose}){
         <p style={{marginTop:8,fontSize:16,lineHeight:1.55,color:'var(--color-text-muted)'}}>Send to @BlakeAnderson3. Please specify where you want your money to go - bladder cancer research, the Wounded Warrior Project, or supporting my Uncle Dave and his family. I will follow up with where the money went.</p>
         <div style={{display:'grid',gridTemplateColumns:mobile?'repeat(3,1fr)':'repeat(5,1fr)',gap:8,marginTop:20}}>{[...presets,'other'].map(v=><Button key={v} size="sm" variant={sel===v?'secondary':'outline'} onClick={()=>{setSel(v);setErr('');}} style={{minWidth:0,paddingLeft:0,paddingRight:0,fontFamily:'var(--font-display)',fontSize:20}}>{v==='other'?'Other':'$'+v}</Button>)}</div>
         {sel==='other' && <Input label="Your amount" prefix="$" inputMode="numeric" value={custom} onChange={e=>{setCustom(e.target.value.replace(/[^0-9]/g,''));setErr('');}} style={{marginTop:16}} />}
-        {impact && <p style={{marginTop:14,fontSize:16,lineHeight:1.5,fontWeight:600,color:'var(--pco-navy)'}}>{impact}</p>}
+        <p style={{marginTop:14,fontSize:16,lineHeight:1.5,fontWeight:600,color:'var(--pco-navy)'}}>Specify where you'd like to support in the payment description.</p>
         {err && <p style={{marginTop:12,fontSize:14,lineHeight:1.5,color:'#B42318'}}>{err}</p>}
         <Button variant="donate" fullWidth style={{marginTop:20}} onClick={()=>{ if(!(parseInt(amt,10)>0)) return setErr('Please enter an amount.'); openVenmo(amt); setDone(true); }}>Open Venmo</Button>
       </>}
