@@ -14,13 +14,13 @@ function Give({mobile, givingUrl, onDonate}){ const gp=mobile?14:undefined; // s
   return <section id="give" style={wrap(mobile)}>
   <H2 m={mobile}>Ways to give</H2>
   <H3 m={mobile} id="pledge">The pledge</H3>
-  <P size={gp}>Pledge an amount per mile. Whether that's a dime or a dollar, anything helps me push to the finish. You only pay for the miles I actually finish inside my 24-hour goal. Cover all 100 and a $1 pledge turns into $100. I'll follow up with everyone who pledged once the ultramarathon is done, and you can decide whether you'd like your money to go to bladder cancer research or disabled veterans.</P>
+  <P size={gp}>Pledge an amount per mile. Whether that's a dime or a dollar, anything helps me push to the finish. You only pay for the miles I actually finish inside my 24-hour goal. Cover all 100 and a $1 pledge turns into $100. I'll follow up with everyone who pledged once the ultramarathon is done, and you can decide whether you'd like your money to go to bladder cancer research or the Wounded Warrior Project.</P>
   <Button variant="donate" fullWidth={mobile} onClick={()=>onDonate('pledge')}>Join the pledge</Button>
   <H3 m={mobile} id="charity" divider>Donate through the UNC Health Foundation</H3>
   <P size={gp}>Tax-deductible donations go through the UNC Health Foundation, a registered 501(c)(3), and support the Matthew I. Milowsky, MD Fund for Genitourinary Oncology.</P>
   <Button variant="donate" fullWidth={mobile} href={givingUrl} target="_blank" rel="noopener">Donate (tax-deductible)</Button>
   <H3 m={mobile} id="venmo" divider>Quick and easy (Venmo)</H3>
-  <P size={gp}>I am accepting Venmo donations as a quick way to simply bypass the need to enter your payment information. In your Venmo donation description please specify where you'd like your money to go, whether that is the UNC Health Foundation, disabled veterans, or simply helping support my Uncle Dave and his family. Zelle transactions will work as well to my phone number (972) 352-9711.</P>
+  <P size={gp}>I am accepting Venmo donations as a quick way to simply bypass the need to enter your payment information. In your Venmo donation description please specify where you'd like your money to go, whether that is the UNC Health Foundation, the Wounded Warrior Project, or simply helping support my Uncle Dave and his family. Zelle transactions will work as well to my phone number (972) 352-9711.</P>
   <Button variant="secondary" fullWidth={mobile} onClick={()=>onDonate('venmo')}>Venmo @BlakeAnderson3</Button>
 </section>; }
 function Countdown({mobile, target}){
@@ -63,7 +63,7 @@ function Why({mobile, givingUrl, onDonate}){ return <section id="why" style={{ba
   </div>
 </div></section>; }
 const VENMO_USER='BlakeAnderson3';
-const VENMO_NOTE="Please specify where you'd like your money to go - bladder cancer research, disabled veterans, or helping support my Uncle Dave and his family.";
+const VENMO_NOTE="Please specify where you'd like your money to go - bladder cancer research, the Wounded Warrior Project, or helping support my Uncle Dave and his family.";
 function openVenmo(amt){
   const q='txn=pay&amount='+(amt||'0')+'&note='+encodeURIComponent(VENMO_NOTE);
   const web='https://venmo.com/'+VENMO_USER+'?'+q;
@@ -82,7 +82,7 @@ function VenmoModal({mobile, onClose}){
     <div onClick={e=>e.stopPropagation()} style={{background:'#fff',borderRadius:6,padding:32,width:'100%',maxWidth:440,maxHeight:'100%',overflowY:'auto',boxShadow:'0 2px 6px rgba(0,0,0,.08)'}}>
       <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline'}}><h3 style={{fontSize:24,fontWeight:600}}>Venmo</h3><button onClick={onClose} aria-label="Close" style={{border:0,background:'none',font:'400 24px/1 var(--font-body)',color:'var(--pco-navy)',cursor:'pointer'}}>×</button></div>
       {done ? <p style={{marginTop:16,fontSize:18,lineHeight:1.55}}>Thank you. That's ${amt} toward the goal. I'll carry it for 100 miles.</p> : <>
-        <p style={{marginTop:8,fontSize:16,lineHeight:1.55,color:'var(--color-text-muted)'}}>Send to @BlakeAnderson3. Please specify where you want your money to go - bladder cancer research, disabled veterans, or supporting my Uncle Dave and his family. I will follow up with where the money went.</p>
+        <p style={{marginTop:8,fontSize:16,lineHeight:1.55,color:'var(--color-text-muted)'}}>Send to @BlakeAnderson3. Please specify where you want your money to go - bladder cancer research, the Wounded Warrior Project, or supporting my Uncle Dave and his family. I will follow up with where the money went.</p>
         <div style={{display:'grid',gridTemplateColumns:mobile?'repeat(3,1fr)':'repeat(5,1fr)',gap:8,marginTop:20}}>{[...presets,'other'].map(v=><Button key={v} size="sm" variant={sel===v?'secondary':'outline'} onClick={()=>{setSel(v);setErr('');}} style={{minWidth:0,paddingLeft:0,paddingRight:0,fontFamily:'var(--font-display)',fontSize:20}}>{v==='other'?'Other':'$'+v}</Button>)}</div>
         {sel==='other' && <Input label="Your amount" prefix="$" inputMode="numeric" value={custom} onChange={e=>{setCustom(e.target.value.replace(/[^0-9]/g,''));setErr('');}} style={{marginTop:16}} />}
         {impact && <p style={{marginTop:14,fontSize:16,lineHeight:1.5,fontWeight:600,color:'var(--pco-navy)'}}>{impact}</p>}
