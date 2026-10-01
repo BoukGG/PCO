@@ -74,4 +74,5 @@ a{color:var(--color-primary);text-decoration:underline;text-underline-offset:3px
 a:hover{color:var(--pco-navy-deep);}
 :focus-visible{outline:var(--focus-ring);outline-offset:var(--focus-offset);}
 
-html{scroll-behavior:smooth}#root{min-height:100vh}
+/* The page background is navy so phone browsers (Safari tints its status bar from it) show navy above the hero photo and below the footer; the content itself stays on --color-bg. */
+html{scroll-behavior:smooth;background:var(--pco-navy-deep)}body{background:var(--pco-navy-deep)}#root{min-height:100vh;background:var(--color-bg)}

@@ -24,7 +24,7 @@ function Hero({mobile, raised, goal, givingUrl, onDonate}){
     {/* The photo fills the first screen above the sticky "Ways to give" bar and runs up behind the transparent nav,
         fading into navy at the very top. Browsers without svh ignore the height and fall back to minHeight. */}
     <div style={{position:'relative',isolation:'isolate',width:'100%',minHeight:480+NAV_H_MOBILE,height:'calc(100svh - '+STICKY_BAR_H+'px)',display:'flex',flexDirection:'column',justifyContent:'space-between'}}>
-      <HeroPhoto position="50% 50%" scrim={'linear-gradient(to bottom, rgba('+NAVY+',.78) 0px, rgba('+NAVY+',0) 150px, rgba('+NAVY+',0) 40%, rgba('+NAVY+',.55) 65%, rgba('+NAVY+',.94) 100%)'} />
+      <HeroPhoto position="50% 50%" scrim={'linear-gradient(to bottom, rgba('+NAVY+',1) 0px, rgba('+NAVY+',.6) 48px, rgba('+NAVY+',0) 170px, rgba('+NAVY+',0) 40%, rgba('+NAVY+',.55) 65%, rgba('+NAVY+',.94) 100%)'} />
       {nav}
       <div style={{position:'relative',zIndex:2,padding:'0 16px 20px'}}>{headline}{bar}</div>
     </div>
