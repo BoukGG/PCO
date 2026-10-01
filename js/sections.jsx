@@ -51,7 +51,7 @@ function Stats({mobile, stats, raceStart, strava, instagram}){
 </div></section>; }
 function Why({mobile, givingUrl, onDonate}){ return <section id="why" style={{background:'var(--pco-paper-2)'}}><div style={wrap(mobile)}>
   <H2 m={mobile}>The why</H2>
-  <P>My Uncle Dave is one of the greatest men I know. He's the guy who shows up constantly for his family, for his friends, and anyone who needs a hand. Spending the last 40 years with the United States Coast Guard, there's one word to describe him, and that's selfless.</P>
+  <P>My Uncle Dave is one of the greatest men I know. He's the guy who shows up constantly for his family, for his friends, and anyone who needs a hand. Spending over 30 years with the United States Coast Guard, there's one word to describe him, and that's selfless.</P>
   <P>Right now he's in the fight of his life against bladder cancer, spending five days a week commuting multiple hours to radiation and chemotherapy. I had the privilege to stand by his side during his first treatment, and what I saw was a man who faces a grueling challenge daily, yet with nothing but a smile on his face.</P>
   <P>It pisses me off that I can't do anything about his suffering. I can't take any treatments for my Uncle Dave. That's why I'm focusing on what I can do for him, which is putting in miles as a mobile billboard — raising money and increasing awareness to make sure people fighting battles they never signed up for get some backup. Every mile up until, and including the 100 I'll run on January 15th, is with my Uncle Dave in mind.</P>
   <div style={{marginTop:28}}><Photo src="assets/photos/mom-and-dave.jpeg" label="Real photo: my beautiful mom and my Uncle Dave" style={{aspectRatio:'4/5',maxWidth:mobile?'100%':440}} />
