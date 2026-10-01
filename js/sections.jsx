@@ -1,7 +1,7 @@
 const { Button, BigNumber, Footer, Input } = window.PissCancerOffDesignSystem_99f843;
 const wrap = m => ({maxWidth:720,margin:'0 auto',padding:m?'40px 16px':'64px 32px'});
 const H2 = ({m,children}) => <h2 style={{fontSize:m?28:36,lineHeight:1.15,fontWeight:600,marginBottom:20}}>{children}</h2>;
-const P = ({children}) => <p style={{fontSize:18,lineHeight:1.55,maxWidth:'65ch',marginBottom:16}}>{children}</p>;
+const P = ({size,children}) => <p style={{fontSize:size||18,lineHeight:size?1.5:1.55,maxWidth:'65ch',marginBottom:16}}>{children}</p>;
 function Cause({mobile}){ return <section id="overview" style={wrap(mobile)}>
   <H2 m={mobile}>The overview</H2>
   <P>Bladder cancer is the sixth most common cancer in the US yet also one of the least funded. My Uncle Dave is fighting it right now, spending 5 days a week in Radiation and Chemotherapy.</P>
@@ -10,16 +10,17 @@ function Cause({mobile}){ return <section id="overview" style={wrap(mobile)}>
   <P>I start my ultramarathon at 12pm on January 15th, 2027, and am hoping to finish within 24 hours. Until then I'm training six days a week. <strong>If you see me running around in that ugly yellow shirt, that was on purpose. Please say hi.</strong></P>
 </section>; }
 const H3 = ({m,id,divider,children}) => <h3 id={id} style={{fontSize:m?22:26,lineHeight:1.2,fontWeight:600,marginBottom:14,...(divider?{marginTop:36,paddingTop:28,borderTop:'1px solid var(--color-border)'}:{marginTop:8})}}>{children}</h3>;
-function Give({mobile, givingUrl, onDonate}){ return <section id="give" style={wrap(mobile)}>
+function Give({mobile, givingUrl, onDonate}){ const gp=mobile?16:undefined; // smaller paragraphs on phones so the UNC donate button shows when you land here
+  return <section id="give" style={wrap(mobile)}>
   <H2 m={mobile}>Ways to give</H2>
   <H3 m={mobile} id="pledge">The pledge</H3>
-  <P>Pledge an amount per mile. Whether that's a dime or a dollar, anything helps me push to the finish. You only pay for the miles I actually finish inside my 24-hour goal. Cover all 100 and a $1 pledge turns into $100. I'll follow up with everyone who pledged once the ultramarathon is done, and you can decide whether you'd like your money to go to bladder cancer research or disabled veterans.</P>
+  <P size={gp}>Pledge an amount per mile. Whether that's a dime or a dollar, anything helps me push to the finish. You only pay for the miles I actually finish inside my 24-hour goal. Cover all 100 and a $1 pledge turns into $100. I'll follow up with everyone who pledged once the ultramarathon is done, and you can decide whether you'd like your money to go to bladder cancer research or disabled veterans.</P>
   <Button variant="donate" fullWidth={mobile} onClick={()=>onDonate('pledge')}>Join the pledge</Button>
   <H3 m={mobile} id="charity" divider>Donate through the UNC Health Foundation</H3>
-  <P>Tax-deductible donations go through the UNC Health Foundation, a registered 501(c)(3), and support the Matthew I. Milowsky, MD Fund for Genitourinary Oncology.</P>
+  <P size={gp}>Tax-deductible donations go through the UNC Health Foundation, a registered 501(c)(3), and support the Matthew I. Milowsky, MD Fund for Genitourinary Oncology.</P>
   <Button variant="donate" fullWidth={mobile} href={givingUrl} target="_blank" rel="noopener">Donate (tax-deductible)</Button>
   <H3 m={mobile} id="venmo" divider>Quick and easy (Venmo)</H3>
-  <P>I am accepting Venmo donations as a quick way to simply bypass the need to enter your payment information. In your Venmo donation description please specify where you'd like your money to go, whether that is the UNC Health Foundation, disabled veterans, or simply helping support my Uncle Dave and his family. Zelle transactions will work as well to my phone number (972) 352-9711.</P>
+  <P size={gp}>I am accepting Venmo donations as a quick way to simply bypass the need to enter your payment information. In your Venmo donation description please specify where you'd like your money to go, whether that is the UNC Health Foundation, disabled veterans, or simply helping support my Uncle Dave and his family. Zelle transactions will work as well to my phone number (972) 352-9711.</P>
   <Button variant="secondary" fullWidth={mobile} onClick={()=>onDonate('venmo')}>Venmo @BlakeAnderson3</Button>
 </section>; }
 function Countdown({mobile, target}){
