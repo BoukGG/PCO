@@ -17,14 +17,15 @@ function HeroPhoto({position, scrim}){
 const STICKY_BAR_H=73; // mobile "Ways to give" bar in sections.jsx: 12px padding + 48px button + 12px padding + 1px border
 const NAV_H_MOBILE=64;
 function Hero({mobile, raised, goal, givingUrl, onDonate}){
-  const nav=<Nav mobile={mobile} onDark logo="assets/logo/horizontal-light.svg" links={[{label:'The overview',href:'#overview'},{label:'The why',href:'#why'},{label:'Ways to give',href:'#give'},{label:'Training stats',href:'#stats'}]} donateHref={mobile?null:'#give'} style={mobile?undefined:{background:'transparent',position:'relative',zIndex:2}} />;
+  const nav=<Nav mobile={mobile} onDark logo="assets/logo/horizontal-light.svg" links={[{label:'The overview',href:'#overview'},{label:'The why',href:'#why'},{label:'Ways to give',href:'#give'},{label:'Training stats',href:'#stats'}]} donateHref={mobile?null:'#give'} style={{background:'transparent',position:'relative',zIndex:2}} />;
   const headline=<h1 style={{color:'#fff',fontSize:mobile?'clamp(32px, 9.2vw, 40px)':'clamp(40px, 6.2vw, 64px)',lineHeight:1.05,fontWeight:700,textShadow}}>I'm running 100 miles to piss cancer off.</h1>;
   const bar=<ProgressBar raised={raised} goal={goal} label="raised/pledged" onDark style={{marginTop:mobile?20:28,textShadow}} />;
   if(mobile) return <section id="top" style={{background:'var(--pco-navy-deep)',color:'#fff'}}>
-    {nav}
-    {/* Fills the first screen between the nav and the sticky "Ways to give" bar. Browsers without svh ignore the height and fall back to minHeight. */}
-    <div style={{position:'relative',isolation:'isolate',width:'100%',minHeight:480,height:'calc(100svh - '+(NAV_H_MOBILE+STICKY_BAR_H)+'px)',display:'flex',flexDirection:'column',justifyContent:'flex-end'}}>
-      <HeroPhoto position="50% 50%" scrim={'linear-gradient(to bottom, rgba('+NAVY+',0) 40%, rgba('+NAVY+',.55) 65%, rgba('+NAVY+',.94) 100%)'} />
+    {/* The photo fills the first screen above the sticky "Ways to give" bar and runs up behind the transparent nav,
+        fading into navy at the very top. Browsers without svh ignore the height and fall back to minHeight. */}
+    <div style={{position:'relative',isolation:'isolate',width:'100%',minHeight:480+NAV_H_MOBILE,height:'calc(100svh - '+STICKY_BAR_H+'px)',display:'flex',flexDirection:'column',justifyContent:'space-between'}}>
+      <HeroPhoto position="50% 50%" scrim={'linear-gradient(to bottom, rgba('+NAVY+',.78) 0px, rgba('+NAVY+',0) 150px, rgba('+NAVY+',0) 40%, rgba('+NAVY+',.55) 65%, rgba('+NAVY+',.94) 100%)'} />
+      {nav}
       <div style={{position:'relative',zIndex:2,padding:'0 16px 20px'}}>{headline}{bar}</div>
     </div>
   </section>;
