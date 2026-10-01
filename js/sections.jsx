@@ -10,7 +10,7 @@ function Cause({mobile}){ return <section id="overview" style={wrap(mobile)}>
   <P>I start my ultramarathon at 12pm on January 15th, 2027, and am hoping to finish within 24 hours. Until then I'm training six days a week. <strong>If you see me running around in that ugly yellow shirt, that was on purpose. Please say hi.</strong></P>
 </section>; }
 const H3 = ({m,id,divider,children}) => <h3 id={id} style={{fontSize:m?22:26,lineHeight:1.2,fontWeight:600,marginBottom:14,...(divider?{marginTop:36,paddingTop:28,borderTop:'1px solid var(--color-border)'}:{marginTop:8})}}>{children}</h3>;
-function Give({mobile, givingUrl, onDonate}){ const gp=mobile?16:undefined; // smaller paragraphs on phones so the UNC donate button shows when you land here
+function Give({mobile, givingUrl, onDonate}){ const gp=mobile?14:undefined; // smaller paragraphs on phones so the UNC donate button shows when you land here
   return <section id="give" style={wrap(mobile)}>
   <H2 m={mobile}>Ways to give</H2>
   <H3 m={mobile} id="pledge">The pledge</H3>
