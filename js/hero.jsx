@@ -15,7 +15,7 @@ function HeroPhoto({position, scrim}){
   </>;
 }
 // Phone menu: a three-line button at the top right of the hero that opens a full-screen navy menu.
-const MENU_LINKS=[{label:'The overview',href:'#overview'},{label:'The why',href:'#why'},{label:'Ways to give',href:'#give'},{label:'My training stats',href:'#stats'}];
+const MENU_LINKS=[{label:'The overview',href:'#overview'},{label:'The why',href:'#why'},{label:'Ways to give',href:'#give'},{label:'My training stats',href:'#stats'},{label:'Follow along',href:'#stats'}];
 const iconBtn={position:'absolute',top:10,right:6,width:44,height:44,display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:6,background:'transparent',border:0,padding:0,cursor:'pointer',zIndex:3};
 const bar3={display:'block',width:26,height:3,borderRadius:2,background:'#fff',boxShadow:'0 1px 2px rgba(0,0,0,.35)'};
 function MobileMenu(){
