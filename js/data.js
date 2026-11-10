@@ -13,7 +13,7 @@ window.PCO_DATA = {
   },
   charity: { name: "UNC Health Foundation", fund: "Matthew I. Milowsky, MD Fund for Genitourinary Oncology" },
   givingUrl: "https://www.givecampus.com/schools/UNCChapelHill/blake-s-run-for-cancer/?a=14158959", // UNC giving page: where the bladder cancer research donate buttons link (opens in a new tab)
-  wwpUrl: "", // Wounded Warrior Project giving page: where the "Donate through Wounded Warrior Project" button links (opens in a new tab)
+  wwpUrl: "https://communityfundraising.woundedwarriorproject.org/campaigns/100-miles-for-Veterans/donate", // Wounded Warrior Project giving page: where the "Donate through Wounded Warrior Project" button links (opens in a new tab)
   charityLine: "Tax-deductible donations are processed by the UNC Health Foundation, a registered 501(c)(3), and support the Matthew I. Milowsky, MD Fund for Genitourinary Oncology.",
   venmo: "@BlakeAnderson3",
   email: "blake@pisscanceroff.org",
