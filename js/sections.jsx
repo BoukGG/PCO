@@ -10,7 +10,7 @@ function Cause({mobile}){ return <section id="overview" style={wrap(mobile)}>
   <P>I start my ultramarathon at 12pm on January 15th, 2027, and am hoping to finish within 24 hours. Until then I'm training six days a week. <strong>If you see me running around in that ugly yellow shirt, that was on purpose. Please say hi.</strong></P>
 </section>; }
 const H3 = ({m,id,divider,children}) => <h3 id={id} style={{fontSize:m?22:26,lineHeight:1.2,fontWeight:600,marginBottom:14,...(divider?{marginTop:36,paddingTop:28,borderTop:'1px solid var(--color-border)'}:{marginTop:8})}}>{children}</h3>;
-function Give({mobile, givingUrl, onDonate}){ const gp=mobile?14:undefined; // smaller paragraphs on phones so the UNC donate button shows when you land here
+function Give({mobile, givingUrl, wwpUrl, onDonate}){ const gp=mobile?14:undefined; // smaller paragraphs on phones so the UNC donate button shows when you land here
   return <section id="give" style={wrap(mobile)}>
   <H2 m={mobile}>Ways to give</H2>
   <H3 m={mobile} id="pledge">The pledge</H3>
@@ -19,6 +19,9 @@ function Give({mobile, givingUrl, onDonate}){ const gp=mobile?14:undefined; // s
   <H3 m={mobile} id="charity" divider>Donate through the UNC Health Foundation</H3>
   <P size={gp}>Tax-deductible donations go through the UNC Health Foundation, a registered 501(c)(3), and support the Matthew I. Milowsky, MD Fund for Genitourinary Oncology.</P>
   <Button variant="donate" fullWidth={mobile} href={givingUrl} target="_blank" rel="noopener">Donate (tax-deductible)</Button>
+  <H3 m={mobile} id="veterans" divider>Donate through Wounded Warrior Project</H3>
+  <P size={gp}>Tax-deductible donations go directly to Wounded Warrior Project, a registered 501(c)(3) nonprofit that has been serving post-9/11 wounded veterans, their families and their caregivers since 2003.</P>
+  <Button variant="donate" fullWidth={mobile} href={wwpUrl} target="_blank" rel="noopener">Donate (tax-deductible)</Button>
   <H3 m={mobile} id="venmo" divider>Quick and easy (Venmo)</H3>
   <P size={gp}>I am accepting Venmo donations as a quick way to simply bypass the need to enter your payment information. In your Venmo donation description please specify where you'd like your money to go, whether that is the UNC Health Foundation, the Wounded Warrior Project, or simply helping support my Uncle Dave and his family. Zelle transactions will work as well to my phone number (972) 352-9711.</P>
   <Button variant="secondary" fullWidth={mobile} onClick={()=>onDonate('venmo')}>Venmo @BlakeAnderson3</Button>
@@ -58,7 +61,7 @@ function Why({mobile, givingUrl, onDonate}){ return <section id="why" style={{ba
   <div style={{marginTop:28}}><Photo src="assets/photos/mom-and-dave.jpeg" label="My mom and my Uncle Dave" loading="lazy" decoding="async" style={{aspectRatio:'4/5',maxWidth:mobile?'100%':440}} />
   <p style={{fontSize:14,lineHeight:1.5,color:'var(--color-text-muted)',marginTop:8}}>My beautiful mom and my Uncle Dave at his first chemotherapy treatment this past August.</p></div>
   <div style={{display:'flex',flexDirection:mobile?'column':'row',flexWrap:'wrap',gap:12,marginTop:28}}>
-    <Button variant="donate" fullWidth={mobile} href={givingUrl} target="_blank" rel="noopener">Donate for Uncle Dave</Button>
+    <Button variant="donate" fullWidth={mobile} href="#charity">Donate for Uncle Dave</Button>
     <Button variant="secondary" fullWidth={mobile} onClick={()=>onDonate('venmo')}>Venmo for Uncle Dave</Button>
     <Button variant="outline" fullWidth={mobile} onClick={()=>onDonate('pledge')}>Join the pledge</Button>
   </div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Piss Cancer Off — 100 miles for bladder cancer research</title>
-<meta name="description" content="I'm running 100 miles on January 15, 2027 to raise $10,000 for bladder cancer research. Please give what you can.">
-<meta property="og:title" content="Piss Cancer Off"><meta property="og:description" content="I'm running 100 miles to piss cancer off. Every dollar goes to bladder cancer research."><meta property="og:image" content="assets/logo/stacked-light.png">
+<meta name="description" content="I'm running 100 miles on January 15, 2027 to raise $10,000 for bladder cancer research and injured veterans. Please give what you can.">
+<meta property="og:title" content="Piss Cancer Off"><meta property="og:description" content="I'm running 100 miles to piss cancer off. Donations support bladder cancer research and injured veterans."><meta property="og:image" content="assets/logo/stacked-light.png">
 <meta name="theme-color" content="#14265F">
 <link rel="icon" href="assets/logo/favicon-512.png"><link rel="apple-touch-icon" href="assets/logo/favicon-512.png">
 <link rel="stylesheet" href="css/styles.css">
@@ -26,7 +26,7 @@ function Site(){
     <Hero mobile={mobile} raised={D.raised} goal={D.goal} givingUrl={D.givingUrl} onDonate={setModal} />
     <Cause mobile={mobile} />
     <Why mobile={mobile} givingUrl={D.givingUrl} onDonate={setModal} />
-    <Give mobile={mobile} givingUrl={D.givingUrl} onDonate={setModal} />
+    <Give mobile={mobile} givingUrl={D.givingUrl} wwpUrl={D.wwpUrl} onDonate={setModal} />
     <Stats mobile={mobile} stats={D.stats} raceStart={D.raceStart} strava={D.strava} instagram={D.instagram} />
     <Footer compact={mobile} logo="assets/logo/horizontal-dark.svg" charityLine={D.charityLine} venmo={D.venmo} email={D.email} instagram={D.instagram} style={mobile?{paddingBottom:88}:undefined} />
     {mobile && <StickyDonate />}
