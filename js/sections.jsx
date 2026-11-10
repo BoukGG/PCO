@@ -19,9 +19,12 @@ function Give({mobile, givingUrl, wwpUrl, onDonate}){ const gp=mobile?14:undefin
   <H3 m={mobile} id="charity" divider>Donate through the UNC Health Foundation</H3>
   <P size={gp}>Tax-deductible donations go through the UNC Health Foundation, a registered 501(c)(3), and support the Matthew I. Milowsky, MD Fund for Genitourinary Oncology.</P>
   <Button variant="donate" fullWidth={mobile} href={givingUrl} target="_blank" rel="noopener">Donate (tax-deductible)</Button>
+  {/* Shown only once wwpUrl is set in data.js, so the live site never has a donate button with no link. */}
+  {wwpUrl && <>
   <H3 m={mobile} id="veterans" divider>Donate through Wounded Warrior Project</H3>
   <P size={gp}>Tax-deductible donations go directly to Wounded Warrior Project, a registered 501(c)(3) nonprofit that has been serving post-9/11 wounded veterans, their families and their caregivers since 2003.</P>
   <Button variant="donate" fullWidth={mobile} href={wwpUrl} target="_blank" rel="noopener">Donate (tax-deductible)</Button>
+  </>}
   <H3 m={mobile} id="venmo" divider>Quick and easy (Venmo)</H3>
   <P size={gp}>I am accepting Venmo donations as a quick way to simply bypass the need to enter your payment information. In your Venmo donation description please specify where you'd like your money to go, whether that is the UNC Health Foundation, the Wounded Warrior Project, or simply helping support my Uncle Dave and his family. Zelle transactions will work as well to my phone number (972) 352-9711.</P>
   <Button variant="secondary" fullWidth={mobile} onClick={()=>onDonate('venmo')}>Venmo @BlakeAnderson3</Button>
