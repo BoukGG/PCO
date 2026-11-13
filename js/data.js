@@ -7,7 +7,7 @@ window.PCO_DATA = {
   // Training stats section. Plain strings, formatted however you want them shown.
   stats: {
     miles: "1,756.0",
-    steps: "4,316,973",
+    steps: "4,320,631",
     hours: "309.9",
     runs: "258"
   },
