@@ -42,4 +42,4 @@ site/
 
 ## Notes
 - React, ReactDOM and Babel load from unpkg (CDN). JSX is compiled in the browser; fine for a one-page site.
-- Tax-deductible donate buttons link straight to `givingUrl` (UNC) or `wwpUrl` (Wounded Warrior Project) in data.js. "Donate for Uncle Dave" in The why scrolls to those two blocks (`#charity`) so the visitor picks a cause. The Venmo button opens an amount picker that deep-links into the Venmo app (`VenmoModal` in `js/sections.jsx`).
+- Tax-deductible donate buttons link straight to `givingUrl` (UNC) or `wwpUrl` (Wounded Warrior Project) in data.js. "Donate in honor of Uncle Dave" in The why scrolls to those two blocks (`#charity`) so the visitor picks a cause; those two nonprofits are the only places donations go. The Venmo button opens an amount picker that deep-links into the Venmo app (`VenmoModal` in `js/sections.jsx`).
