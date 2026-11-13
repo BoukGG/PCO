@@ -26,7 +26,7 @@ function Give({mobile, givingUrl, wwpUrl, onDonate}){ const gp=mobile?14:undefin
   <Button variant="donate" fullWidth={mobile} href={wwpUrl} target="_blank" rel="noopener">Donate (tax-deductible)</Button>
   </>}
   <H3 m={mobile} id="venmo" divider>Quick and easy (Venmo)</H3>
-  <P size={gp}>I am accepting Venmo donations as a quick way to simply bypass the need to enter your payment information. In your Venmo donation description please specify where you'd like your money to go, whether that is the UNC Health Foundation or the Wounded Warrior Project. Zelle transactions will work as well to my phone number (972) 352-9711.</P>
+  <P size={gp}>I am accepting Venmo donations as a quick and easy way to donate. In your Venmo description please specify where you'd like your money to go, whether that is the UNC Health Foundation or the Wounded Warrior Project.</P>
   <Button variant="secondary" fullWidth={mobile} onClick={()=>onDonate('venmo')}>Venmo @BlakeAnderson3</Button>
 </section>; }
 function Countdown({mobile, target}){
